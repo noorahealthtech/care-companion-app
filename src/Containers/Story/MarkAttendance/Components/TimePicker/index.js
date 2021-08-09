@@ -19,7 +19,11 @@ const TimePicker = (props) => {
     };
 
     const handleConfirm = (date) => {
-        let datePicked = moment(date).format('HH:MM')
+        console.log("Pick time"+date);
+        console.log("moment time  "+  moment(date).format('hh:mm A'));
+        //let datePicked = moment(date,'MMM dd  YYYY hh:mm:ss a').format('HH:MM')
+        let datePicked = moment(date).format('hh:mm A');
+        console.log("Selected time"+datePicked);
         setPickedDate(datePicked)
         props.onTimeChange(datePicked)
         hideDatePicker();
@@ -51,7 +55,6 @@ const TimePicker = (props) => {
         return time.join('') // return adjusted time or original string
     }
     return (
-
         <View style={[styles.container, props.inputContainerStyles]}>
             <DateTimePickerModal
                 isVisible={isDatePickerVisible}
@@ -72,7 +75,8 @@ const TimePicker = (props) => {
     );
 };
 
-// define your styles
+
+//define your styles
 const styles = StyleSheet.create({
     container: {
         display: 'flex'

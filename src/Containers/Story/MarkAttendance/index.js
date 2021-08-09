@@ -22,7 +22,7 @@ const MarkAttendance = (props) => {
     console.log("showing props here for marked attendance", props)
     const { t } = useTranslation()
     const [date, SetDate] = useState(new Date())
-    const [time, SetTime] = useState(moment().format('HH:MM a'))
+    const [time, SetTime] = useState(moment().format('hh:mm A'))
     const [people, SetPeople] = useState(null)
     const [location, SetLocation] = useState(null)
     const [session, SetSession] = useState(null)
@@ -73,7 +73,7 @@ const MarkAttendance = (props) => {
     ])
     useEffect(() => {
     }, [classesTypes])
-
+    
     const updateCheckedState = (tapped) => {
         classesTypes.map((checked) => {
             checked.isSelected = false
@@ -135,6 +135,7 @@ const MarkAttendance = (props) => {
                 showToast('Please enter location!')
                 return
             }
+
             else {
                 setLoading(true)
                 if (user) {
@@ -201,6 +202,8 @@ const MarkAttendance = (props) => {
                     <Picker
                         onPress={toggleModal}
                         selectedImage={selectedImage}
+                        
+                        
                     />
                     <CustomDateTimePicker date={date} onDateChange={SetDate} title={t('markScreen.date')} />
                     <TimePicker time={time} onTimeChange={SetTime} title={t('markScreen.time')} placeholder={time} />

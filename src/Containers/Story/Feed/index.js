@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, StatusBar } from 'react-native';
+import { View, Text, StyleSheet, StatusBar, Alert } from 'react-native';
 import CustomHeader from '../../../Components/CustomHeader'
 import { Colors, WP } from '../../../Theme';
 import FeedListing from './Components/FeedList'
@@ -19,8 +19,10 @@ const Feed = (props) => {
     const [loading, setLoading] = useState(false)
     console.log("showing data  in feeds", nurseFeed)
     useEffect(() => {
+
         isOnline((connected) => {
             setLoading(true)
+            
             dispatch(getNurseFeed(user.id, setLoading))
         }, (offline) => {
             setLoading(false)

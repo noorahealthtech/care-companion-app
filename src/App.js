@@ -10,6 +10,9 @@ import { Layout } from '@/Theme'
 import './Translations'
 import { navigationRef } from './Services/navigation';
 import { Colors } from './Theme'
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
 
 
 const App = () => (
