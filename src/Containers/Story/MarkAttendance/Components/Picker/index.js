@@ -19,7 +19,8 @@ const Picker = (props) => {
                 source={props.selectedImage ? { uri: props.selectedImage.uri } : Images.picker}
                 style={styles.iconContainer}
             />
-            <Text allowFontScaling={false} style={styles.imageText}>{t('markScreen.uploadText')}</Text>
+            <Text allowFontScaling={false} style={styles.imageText}>{props.selectedImage ? t('markScreen.textUploaded'):t('markScreen.uploadText')}</Text>
+            {/* <Text allowFontScaling={false} style={styles.imageText}>{t('markScreen.uploadText')}</Text> */}
         </TouchableOpacity>
     );
 };
@@ -48,7 +49,8 @@ const styles = StyleSheet.create({
     imageText: {
         color: Colors.grey,
         fontFamily: 'Assistant-Regular',
-        fontSize: WP('5.5')
+        fontSize: WP('5.5'),
+        padding: 5
     }
 });
 

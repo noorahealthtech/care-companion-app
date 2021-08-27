@@ -36,6 +36,7 @@ const AttendanceMarked = (props) => {
                 titleColor={Colors.black}
             />
             <CustomButton
+                
                 title={t('attendanceMarked.button2')}
                 titleColor={Colors.black}
             />

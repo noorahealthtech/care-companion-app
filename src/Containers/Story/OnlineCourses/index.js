@@ -13,6 +13,7 @@ import FocusAwareStatusBar from '../../../Components/FoucsAwareStatusBar'
 
 // create a component
 const OnlineCourses = (props) => {
+    console.log('OnlineCourseProps===', JSON.stringify(props))
     const { t } = useTranslation()
     const user = useSelector(state => state.auth.user)
     const dispatch = useDispatch()

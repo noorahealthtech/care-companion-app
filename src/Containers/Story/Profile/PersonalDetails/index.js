@@ -9,8 +9,8 @@ import moment from 'moment'
 // create a component
 const PersonalDetails = (props) => {
     const { t } = useTranslation()
-
-
+    console.log('props.ImageProfile===', props)
+    console.log('PropsProfile====',props.profilePicture)
     return (
         <View style={styles.container}>
             <Text allowFontScaling={false} style={styles.title}>{t('profile.personal')}</Text>
@@ -19,7 +19,7 @@ const PersonalDetails = (props) => {
                 <AvatarContainer profilePicture={props.profilePicture} />
             </View>
             <Text style={styles.questions}>{t('profile.phone')} :    <Text style={styles.details}>{props.phone}</Text></Text>
-            <Text style={styles.questions}>{t('profile.date')} :    <Text style={styles.details}>{moment(props.date).format('DD MMMM YYYY')}</Text></Text>
+            <Text style={styles.questions}>{t('profile.date')} :    <Text style={styles.details}>{moment(props.date).format('YYYY-MM-DD')}</Text></Text>
             <Text style={styles.questions}>{t('profile.status')} :    <Text style={styles.details}>{props.status}</Text> </Text>
             <Text style={styles.questions}>{t('profile.year')} :    <Text style={styles.details}>{props.year}</Text></Text>
             <Text style={styles.questions}>{t('profile.trainer')} :    <Text style={styles.details}>{props.trainer}</Text></Text>

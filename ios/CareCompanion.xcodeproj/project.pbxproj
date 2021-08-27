@@ -390,8 +390,9 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = LS4F673DWQ;
+						DevelopmentTeam = X32J99JF3J;
 						LastSwiftMigration = 1120;
+						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -828,8 +829,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CareCompanion/CareCompanionDebug.entitlements;
-				CURRENT_PROJECT_VERSION = 7;
-				DEVELOPMENT_TEAM = LS4F673DWQ;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10;
+				DEVELOPMENT_TEAM = X32J99JF3J;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = CareCompanion/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -839,8 +842,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mk.CareCompanion;
+				PRODUCT_BUNDLE_IDENTIFIER = com.prometteur.CareCompanion;
 				PRODUCT_NAME = CareCompanion;
+				PROVISIONING_PROFILE_SPECIFIER = care_companion_appstore;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -854,8 +858,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CareCompanion/CareCompanionRelease.entitlements;
-				CURRENT_PROJECT_VERSION = 7;
-				DEVELOPMENT_TEAM = LS4F673DWQ;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10;
+				DEVELOPMENT_TEAM = X32J99JF3J;
 				INFOPLIST_FILE = CareCompanion/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 3.0;
@@ -864,8 +870,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mk.CareCompanion;
+				PRODUCT_BUNDLE_IDENTIFIER = com.prometteur.CareCompanion;
 				PRODUCT_NAME = CareCompanion;
+				PROVISIONING_PROFILE_SPECIFIER = care_companion_appstore;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

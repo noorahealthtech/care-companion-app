@@ -16,13 +16,15 @@ import { showToast, getPicture, isOnline } from '../../../Services';
 import { useDispatch, useSelector } from 'react-redux'
 import { markAttendance } from '../../../Store/actions'
 import moment from 'moment'
+import { useIsFocused } from '@react-navigation/native';
 import { cos } from 'react-native-reanimated';
 // create a component
 const MarkAttendance = (props) => {
-    console.log("showing props here for marked attendance", props)
+    console.log("showing props here for marked attendance", JSON.stringify(props))
     const { t } = useTranslation()
+    let now = new Date();   
     const [date, SetDate] = useState(new Date())
-    const [time, SetTime] = useState(moment().format('hh:mm A'))
+    const [time, SetTime] = useState('')
     const [people, SetPeople] = useState(null)
     const [location, SetLocation] = useState(null)
     const [session, SetSession] = useState(null)
@@ -32,7 +34,12 @@ const MarkAttendance = (props) => {
     const user = useSelector(state => state.auth.user)
     const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
+    const isFocused = useIsFocused();
 
+    // var selectedOptionId = classesTypes.find((check) => check.isSelected)
+    // console.log("showing is selected", selectedOptionId)
+    
+    console.log('time====', time)
     const [classesTypes, setClassesTypes] = useState([
         {
             id: 1,
@@ -72,7 +79,22 @@ const MarkAttendance = (props) => {
 
     ])
     useEffect(() => {
-    }, [classesTypes])
+        // if(time == ''){
+        //     console.log('InsideIf===', time);
+        //     SetTime(moment().format('hh:mm A'))
+        // }
+        SetDate(new Date()) 
+        SetTime(moment().format('hh:mm A'))
+    }, [isFocused])
+
+    useEffect(() => {
+        if(time == ''){
+            SetTime(moment().format('hh:mm A'))
+        } else {
+            console.log('Updated time  ======> ',time);
+        }
+
+    },[time,isFocused,classesTypes])
     
     const updateCheckedState = (tapped) => {
         classesTypes.map((checked) => {
@@ -112,29 +134,29 @@ const MarkAttendance = (props) => {
         try {
             var selectedOptionId = classesTypes.find((check) => check.isSelected)
             console.log("showing is selected", selectedOptionId)
-            if (!date) {
-                showToast('Please enter date!')
-                return
-            }
-            else if (!selectedImage) {
+            // if (!date) {
+            //     showToast('Please enter date!')
+            //     return
+            // }
+             if (!selectedImage) {
                 showToast('Please select image!')
             }
-            else if (!time) {
-                showToast('Please enter time!')
-                return
-            }
-            else if (!people) {
-                showToast('Please enter number of people!')
-                return
-            }
+            // else if (!time) {
+            //     showToast('Please enter time!')
+            //     return
+            // }
+            // else if (!people) {
+            //     showToast('Please enter number of people!')
+            //     return
+            // }
             else if (!selectedOptionId) {
                 showToast('Please select class type!')
                 return
             }
-            else if (!location) {
-                showToast('Please enter location!')
-                return
-            }
+            // else if (!location) {
+            //     showToast('Please enter location!')
+            //     return
+            // }
 
             else {
                 setLoading(true)
@@ -142,10 +164,12 @@ const MarkAttendance = (props) => {
                     let params = {
                         user_id: user.id,
                         class_id: "0",
+                        class_type_id: "0",
                         class_type: selectedOptionId.id,
                         image: 'data:image/jpeg;base64,' + selectedImage.data,
                         class_date: moment(date).format('YYYY-MM-DD'),
-                        class_time: time.slice(0, 5),
+                        // class_time: time.slice(0, 5),
+                        class_time: time,
                         no_of_people: people,
                         no_of_family: "0",
                         ward: location,
@@ -157,9 +181,10 @@ const MarkAttendance = (props) => {
                         appuser_id: user.id,
                         access_token: ""
                     }
-                    console.log("showing aprams here", params)
+                    // console.log("showing Submit Params here", params)
                     isOnline((connected) => {
                         dispatch(markAttendance(params, (response) => {
+                            console.log("showing Submit Mark Params here", params)
                             if (response) {
 
                                 SetPeople(null)
@@ -197,7 +222,7 @@ const MarkAttendance = (props) => {
                 screenTitle={t('markScreen.title')}
                 navigation={props.navigation}
             />
-            <KeyboardAwareScrollView >
+            <KeyboardAwareScrollView keyboardShouldPersistTaps="always" >
                 <View style={styles.domainContainer}>
                     <Picker
                         onPress={toggleModal}
@@ -206,7 +231,7 @@ const MarkAttendance = (props) => {
                         
                     />
                     <CustomDateTimePicker date={date} onDateChange={SetDate} title={t('markScreen.date')} />
-                    <TimePicker time={time} onTimeChange={SetTime} title={t('markScreen.time')} placeholder={time} />
+                    <TimePicker time={time} onTimeChange={ time => SetTime(time)} title={t('markScreen.time')} placeholder={time} />
                     <SessionInput title={t('markScreen.people')} placeholder={t('markScreen.peoplePlaceHolder')} keyboardType={'numeric'} value={people} onChangeText={SetPeople} />
                     <OptionsListing classesTypes={classesTypes} title={t('markScreen.type')} subTitle={t('markScreen.select')} onPress={(tapped) => { updateCheckedState(tapped) }} />
                     < SessionInput title={t('markScreen.location')} placeholder={t('markScreen.locationPlaceHolder')} value={location} onChangeText={SetLocation} />

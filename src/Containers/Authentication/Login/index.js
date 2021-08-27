@@ -15,15 +15,16 @@ const Login = ({ navigation }) => {
     const dispatch = useDispatch()
     const [mobile, setMobile] = useState("")
     const [loading, setLoading] = useState(false)
-    dispatch(getAppSettings())
     sendOtp = () => {
         if (phoneNumberValidator(mobile)) {
             let params = {
                 mobile_number: mobile,
             }
+            console.log('MobileParams====', JSON.stringify(params))
             setLoading(true)
             isOnline((connected) => {
                 dispatch(requestOtp(params, navigation, setLoading))
+                console.log('ResquestOTPDispatchParam====', JSON.stringify(params))
             }, (offline) => {
                 setLoading(false)
                 showToast(t('commonApp.internetError'))

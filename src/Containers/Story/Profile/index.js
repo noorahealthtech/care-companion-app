@@ -9,12 +9,14 @@ import PersonalDetails from './PersonalDetails'
 import ProfessionalDetails from './ProfessionalDetails'
 import { useDispatch, useSelector } from 'react-redux'
 import FocusAwareStatusBar from '../../../Components/FoucsAwareStatusBar'
+import moment from 'moment'
 // create a component
 const Profile = (props) => {
     const { t } = useTranslation()
     const user = useSelector(state => state.auth.user)
     const nurserProfile = useSelector(state => state.story.nurseProfile)
-    console.log('showing nurse profile', nurserProfile)
+    console.log('showing nurse profile=====', JSON.stringify(nurserProfile))
+    console.log('showing nurseProfile name =====', JSON.stringify(nurserProfile.hospital.name))
     const [classesTypes, setClassesTypes] = useState([
         {
             id: 1,
@@ -82,9 +84,9 @@ const Profile = (props) => {
                     <PersonalDetails
                         name={nurserProfile.nurse.first_name + ' ' + nurserProfile.nurse.last_name}
                         phone={nurserProfile.nurse.mobile_number.match('NA') ? 'Mobile number not found' : nurserProfile.nurse.mobile_number}
-                        date={nurserProfile.nurse.dob.match('NA') ? 'Date of birth not found' : nurserProfile.nurse.dob}
+                        date={nurserProfile.nurse.dob.match('NA') ? 'Date of birth not found' :nurserProfile.nurse.dob}
                         status={nurserProfile.status.match("1") ? 'Active' : 'Non Active'}
-                        year={nurserProfile.graduating_year.match('NA') ? 'Graduating year not found' : nurserProfile.graduating_year}
+                        year={nurserProfile.graduating_year.match('NA') ? 'Graduating year not found' : moment(nurserProfile.graduating_year).format('YYYY')}
                         trainer={nurserProfile.trainer.match('NA') ? "trainer id not found" : nurserProfile.trainer}
                         profilePicture={nurserProfile.nurse.profile_image}
                     />

@@ -4,6 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import CourseItem from '../CourseItem'
 // create a component
 const CoursesList = (props) => {
+    console.log('propsCourseList===', JSON.stringify(props))
     return (
         <View style={styles.container}>
             {props.courses.map((course) => {

@@ -13,6 +13,7 @@ const PageItem = (props) => {
     const { t } = useTranslation()
     const dispatch = useDispatch()
     const user = useSelector(state => state.auth.user)
+    console.log('User=====', user)
     console.log('showing props', props)
 
     const navigater = (page) => {

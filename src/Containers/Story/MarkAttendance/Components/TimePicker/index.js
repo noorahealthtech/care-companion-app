@@ -57,6 +57,7 @@ const TimePicker = (props) => {
     return (
         <View style={[styles.container, props.inputContainerStyles]}>
             <DateTimePickerModal
+                headerTextIOS="Pick a time"
                 isVisible={isDatePickerVisible}
                 mode="time"
                 onConfirm={handleConfirm}

@@ -7,6 +7,7 @@ import Dash from 'react-native-dash';
 
 // create a component
 const ClassesItems = (props) => {
+    console.log('ClassItemProps===', JSON.stringify(props))
     function tConvert(time) {
         // Check correct time format and split into components
         time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];

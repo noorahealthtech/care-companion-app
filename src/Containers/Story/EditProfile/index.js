@@ -13,14 +13,18 @@ import MedicalConditionsPicker from './Components/index'
 import { pickImages, isOnline, updateUserProfile, phoneNumberValidator, showToast } from '../../../Services'
 import { updateUserProfiles, fetchNurseProfile } from '../../../Store/actions'
 import { useDispatch, useSelector } from 'react-redux'
+import moment from 'moment'
 import FocusAwareStatusBar from '../../../Components/FoucsAwareStatusBar'
 
 // create a component
 const EditProfile = (props) => {
     console.log('showing profiles', props.route)
     const { params } = props.route
+    console.log('showing Hospital Name=====', JSON.stringify(params.hospital.name))
+    console.log('para====', props.route)
     const { t } = useTranslation()
     const user = useSelector(state => state.auth.user)
+    console.log('User====', JSON.stringify(user))
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
     const [classesTypes, setClassesTypes] = useState([
@@ -135,6 +139,7 @@ const EditProfile = (props) => {
         })
     }
     useEffect(() => {
+       console.log('DOB===', dob)
         try {
             updateCheckedState(params.ccp_condition_id)
             if (params.hospital_condition.length > 0) {
@@ -153,6 +158,9 @@ const EditProfile = (props) => {
         })
     }
 
+    // useEffect(() => {
+    //     setGraduating_year(params.graduating_year)
+    //   }, [params])
     const submitProfile = () => {
         try {
             isOnline((connected) => {
@@ -162,7 +170,7 @@ const EditProfile = (props) => {
                     image: pickedImage.uri ? 'data:image/jpeg;base64,' + pickedImage.data : "",
                     first_name: fname,
                     last_name: lname,
-                    dob: dob,
+                    dob:dob,
                     graduating_year: graduating_year,
                     hospital_id: params.hospital.id,
                     hospital_name: hospital,
@@ -170,16 +178,17 @@ const EditProfile = (props) => {
                     designation: designation,
                     trainer: trainer,
                     hospital_condition_id: medicalPlaceHolder ? medicalPlaceHolder.id : 1,
-                    tot_date: tot_date,
+                    tot_date: moment(tot_date).format("YYYY-MM-DD hh:mm:ss A Z"),
                     ccp_condition_id: pickedCcp.id ? pickedCcp.id : pickedCcp,
                     token: "j56sugRk029Po5DB",
                     appuser_id: user.id,
                     access_token: ""
                 }
-                console.log("showing params", parameters)
-
+              
+                console.log('Params===', JSON.stringify(parameters))
                 dispatch(updateUserProfiles(parameters,
                     ((updated) => {
+                        console.log('UpdatedParams===', JSON.stringify(parameters))
                         setLoading(false)
                         showToast('Profile Updated Successfully!')
                         dispatch(fetchNurseProfile(user.id))
@@ -219,16 +228,18 @@ const EditProfile = (props) => {
                     profilePicture={pickedImage.uri ? pickedImage.uri : pickedImage}
                 />
                 <Text allowFontScaling={false} style={styles.title}>{t('profile.personal')}</Text>
-                < SessionInput title={t('editprofile.name')} placeholder={t('editprofile.locationPlaceHolder')} value={fname} onChangeText={setFName} />
-                < SessionInput title={t('editprofile.lname')} placeholder={t('editprofile.locationPlaceHolder')} value={lname} onChangeText={setLName} />
-                <SessionInput title={t('editprofile.mobile')} placeholder={t('editprofile.peoplePlaceHolder')} keyboardType={'numeric'} value={mobile} onChangeText={setMobile} editable={false} />
-                <CustomDateTimePicker isDate={true} date={dob} onDateChange={setDob} title={t('editprofile.Date')} />
-                <CustomDateTimePicker isDate={true} date={graduating_year} onDateChange={setGraduating_year} title={t('editprofile.year')} />
-                < SessionInput title={t('editprofile.trainer')} placeholder={t('Enter trainer id')} value={trainer} onChangeText={setTrainer} />
+                < SessionInput title={t('editprofile.name')} placeholder={t('editprofile.name')} value={fname} onChangeText={setFName} />
+                < SessionInput title={t('editprofile.lname')} placeholder={t('editprofile.lname')} value={lname} onChangeText={setLName} />
+                <SessionInput title={t('editprofile.mobile')} placeholder={t('editprofile.mobile')} keyboardType={'numeric'} value={mobile} onChangeText={setMobile} editable={false} />
+                {/* <CustomDateTimePicker isDate={true} date={moment(dob).format('YYYY-MM-DD')} onDateChange={setDob(moment(dob).format('YYYY-MM-DD'))} title={t('editprofile.Date')} /> */}
+                {/* <CustomDateTimePicker isDate={true} date={moment(graduating_year).format('YYYY')} onDateChange={(graduating_year) => setGraduating_year(moment(graduating_year).format('YYYY'))} title={t('editprofile.year')} /> */}
+            <CustomDateTimePicker isDate={true} date={dob} onDateChange={setDob} title={t('editprofile.Date')} /> 
+             <CustomDateTimePicker isDate={true} date={graduating_year} onDateChange={setGraduating_year} title={t('editprofile.year')} />
+                < SessionInput title={t('editprofile.trainer')} placeholder={t('editprofile.trainer')} value={trainer} onChangeText={setTrainer} />
                 <Text allowFontScaling={false} style={styles.title}>{t('profile.professional')}</Text>
-                <SessionInput title={t('profile.name')} placeholder={t('profile.sessionPlaceHolder')} value={hospital} onChangeText={setHospitalName} />
+                <SessionInput title={t('profile.name')} placeholder={t('profile.name')} value={hospital} onChangeText={(hospital) => setHospitalName(hospital)} />
                 <CustomDateTimePicker isDate={true} date={joining} onDateChange={setJoining} title={t('profile.dateOfJoining')} />
-                <SessionInput title={t('profile.designation')} placeholder={t('profile.sessionPlaceHolder')} value={designation} onChangeText={setDesignation} />
+                <SessionInput title={t('profile.designation')} placeholder={t('profile.designation')} value={designation} onChangeText={setDesignation} />
                 <MedicalConditionsPicker title={t('profile.medical')} items={items} setItems={setItems} value={value} setValue={setValue} placeholder={params.hospital_condition} pickedMedicalValue={(pickedOption) => setMedicalPlaceHolder(pickedOption)} />
                 <CustomDateTimePicker isDate={true} date={tot_date} onDateChange={setTot_date} title={t('profile.tot')} />
                 <OptionsListing classesTypes={classesTypes} title={t('profile.ccp')} onPress={(tapped) => { updateCheckedState(tapped.id) }} isEditProfle={true} />

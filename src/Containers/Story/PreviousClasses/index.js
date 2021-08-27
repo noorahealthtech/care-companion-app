@@ -11,8 +11,10 @@ import { useDispatch, useSelector } from 'react-redux'
 
 // create a component
 const PreviousClasses = (props) => {
+    console.log('PreviousClassProps====',JSON.stringify(props))
     const { t } = useTranslation()
     const previousClasses = useSelector(state => state.story.classesDetails)
+    console.log('previousClass======', JSON.stringify(previousClasses))
     console.log("showing previous classes in content", previousClasses)
     var msgTotal
     if (previousClasses.length > 0) {
@@ -26,7 +28,11 @@ const PreviousClasses = (props) => {
     }
 
     useEffect(() => {
+
     }, [previousClasses, msgTotal])
+    
+    
+ 
     return (
         <View style={styles.container}>
             <StatusBar

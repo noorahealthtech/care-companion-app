@@ -18,16 +18,19 @@ const CcpToolsDetails = (props) => {
     const user = useSelector(state => state.auth.user)
     const [material, setMaterial] = useState([])
     let filteredDetails = []
-
+    console.log('params.ccp.type_id', JSON.stringify(params.ccp.type_id))
     useEffect(() => {
         isOnline(() => {
             dispatch(fetchCCPMaterials(user.id, (courses) => {
                 console.log("showing response here for material", courses)
                 if (courses.length > 0) {
+                  
                     courses.map((materials) => {
-                        if (materials.type_id.match(params.ccp.type_id)) {
+                        if (materials.type_id.toString().match(params.ccp.type_id)) {
+                          
+                            console.log('MaterialsFound====',JSON.stringify(materials.type_id))
                             filteredDetails.push(materials)
-                            console.log("showingg", materials)
+                            // console.log("materialss====", materials)
                         }
                     })
                 }

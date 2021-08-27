@@ -6,18 +6,36 @@ import {
     Layout, Fonts, Images, WP
 } from '@/Theme'
 // create a component
+// let url = props.course.training_url;
 const CourseItem = (props) => {
+    console.log('CourseProps=====',JSON.stringify(props))
     const openCoursesDetails = (links) => {
         try {
             Linking.openURL(links)
-
+            console.log('Link is working===', links)
+            return links.protocol === "http:" || links.protocol === "https:";
         } catch (error) {
-
+           return  console.log('error==',error);
         }
+       
     }
+
+
+// const isValidHttpUrl = (string) => {
+//      url;
+    
+//     try {
+//       url = new URL(string);
+//     } catch (_) {
+//       return false;  
+//     }
+  
+//     return url.protocol === "http:" || url.protocol === "https:";
+//   }
+
     return (
         <TouchableOpacity style={styles.container}
-            onPress={() => { openCoursesDetails(props.course.training_url) }}
+            onPress={() => { openCoursesDetails(`${ "http://" + props.course.training_url}` ? `${ "http://" + props.course.training_url}` : `${ "https://" + props.course.training_url}`) }}
         >
             <View style={styles.header}>
                 <Text allowFontScaling={false} style={styles.title}>{props.course.name}</Text>

@@ -8,7 +8,8 @@ import { Layout, Fonts, Images } from '@/Theme'
 import { useDispatch, useSelector } from 'react-redux'
 import { getNurseFeed } from '../../../Store/actions'
 import { ShowActivityIndicator, isOnline, showToast } from '../../../Services';
-import FocusAwareStatusBar from '../../../Components/FoucsAwareStatusBar'
+import FocusAwareStatusBar from '../../../Components/FoucsAwareStatusBar';
+import { useNavigation } from '@react-navigation/native';
 
 // create a component
 const Feed = (props) => {
@@ -17,7 +18,10 @@ const Feed = (props) => {
     const user = useSelector(state => state.auth.user)
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
-    console.log("showing data  in feeds", nurseFeed)
+    console.log("showing data in feeds", nurseFeed)
+
+    const navigation = useNavigation()
+    
     useEffect(() => {
 
         isOnline((connected) => {
@@ -30,6 +34,23 @@ const Feed = (props) => {
         })
     }, [props.route])
 
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+          // The screen is focused
+          // Call any action
+          isOnline((connected) => {
+            setLoading(true)
+            
+            dispatch(getNurseFeed(user.id, setLoading))
+        }, (offline) => {
+            setLoading(false)
+            showToast(t('commonApp.internetError'))
+        })
+        });
+    
+        // Return the function to unsubscribe from the event so it gets removed on unmount
+        return unsubscribe;
+      }, [props.route]);
 
     const _handleRefresh = () => {
         isOnline((connected) => {

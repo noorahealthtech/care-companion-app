@@ -11,10 +11,12 @@ import FocusAwareStatusBar from '../../../Components/FoucsAwareStatusBar'
 
 // create a component
 const OnlineCoursesDetails = (props) => {
+    console.log('OnlineCoursesDetailsProps==',JSON.stringify(props))
     const { t } = useTranslation()
     const { params } = props.route
     console.log('showing params', params)
     const courses = useSelector(state => state.story.coursesLists)
+    console.log('Courses====', JSON.stringify(courses))
     const [coursesFiltered, setCoursesFiltered] = useState([])
     useEffect(() => {
         try {

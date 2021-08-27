@@ -123,7 +123,8 @@ export default StyleSheet.create({
   inputText: {
     color: Colors.black,
     fontSize: WP('5.5'),
-    fontFamily: 'Assistant-Regular'
+    fontFamily: 'Assistant-Regular',
+    
   },
   btnText: {
     color: Colors.appColor,

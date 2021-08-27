@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component, useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, Alert,Keyboard } from 'react-native';
 import CustomHeader from '../../../Components/CustomHeader'
 import FeedHeader from './Components/FeedHeader'
 import { Colors, WP } from '../../../Theme';
@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchNurseComments, addComments } from '../../../Store/actions'
 import { isOnline, ShowActivityIndicator, showToast } from '../../../Services';
 import moment from 'moment'
+
+
 // create a component
 const AddComments = ({ route, navigation }) => {
     console.log("showing props here", route)
@@ -23,8 +25,10 @@ const AddComments = ({ route, navigation }) => {
     const [comments, setComments] = useState([])
     const [addedComments, setAddedComments] = useState(null)
     const [taggedId, setTaggedId] = useState(null)
-
+   console.log('coments====',JSON.stringify(comments))
+   console.log('user.id===',JSON.stringify(user.id) )
     useEffect(() => {
+        setAddedComments(null)
         isOnline((connected) => {
             setLoading(true)
             setComments([])
@@ -36,26 +40,36 @@ const AddComments = ({ route, navigation }) => {
             })
     }, [params])
 
-    const addComment = () => {
+    const addComment = (comment) => {
         try {
-            if (addedComments) {
+            // if (addedComments) {
+            if (comment) {
+                // console.log('AddedComments==',addedComments)
+                console.log('AddedComments==',comment)
                 let parameter = {
                     user_id: user.id,
                     content_id: params.id,
-                    comment: addedComments,
+                    comment: comment,
                     mentioned_user_id: taggedId,
-                    entry_time: moment().format('YYYY-MM-DD HH:MM:SS'),
-                    session_id: moment().format('YYYY-MM-DD HH:MM:SS'),
+                    entry_time: moment().format('YYYY-MM-DD hh:mm:ss'),
+                    session_id: moment().format('YYYY-MM-DD hh:mm:ss'),
+                    // entry_time: moment().format('YYYY-MM-DD HH:MM:SS'),
+                    // session_id: moment().format('YYYY-MM-DD HH:MM:SS'),
                     token: "j56sugRk029Po5DB",
                     appuser_id: user.id,
                     access_token: "",
                 }
+                console.log('CommentParams====', JSON.stringify(parameter))
                 setLoading(true)
                 isOnline((connected) => {
                     dispatch(addComments(parameter, (success) => {
+                        console.log('CommentAddResponse======', JSON.stringify(parameter))
                         dispatch(fetchNurseComments(user.id, params.id, (comments) => { setLoading(false), setComments(comments) }, () => { setLoading(false) }))
                         setAddedComments(null)
                     }, () => { setLoading(false), showToast('Please tap post again!') }))
+
+                    console.log("ParameterOFComment==="+ JSON.stringify(parameter));
+
                 }, (offline) => {
                     showToast(t('commonApp.internetError'))
 
@@ -79,15 +93,22 @@ const AddComments = ({ route, navigation }) => {
                 screenTitle={'Add Comment'}
                 navigation={navigation}
             />
-            <KeyboardAwareScrollView>
+            <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
                 <FeedHeader
                     feed={params}
                 />
                 <CommentInputBox
                     placeholder={'Add Comment Here'}
-                    onPress={addComment}
+                    onPress={(comment) => {
+                        console.log('added comment in post button ====> ',comment);
+                        Keyboard.dismiss()
+                        addComment(comment)
+                    }}
                     value={addedComments}
-                    onChangeText={(text) => setAddedComments(text)}
+                    onChangeText={(text) => {
+                        console.log('comment text ====> ',text);
+                        setAddedComments(text)
+                    }}
                     taggedId={setTaggedId}
                 />
                 {loading ?

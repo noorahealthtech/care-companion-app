@@ -8,6 +8,7 @@ import {
 import { showToast } from '../../../../../Services';
 // create a component
 const CourseItem = (props) => {
+    console.log('CourseItem====',JSON.stringify(props))
     const openCoursesDetails = (links) => {
 
         try {

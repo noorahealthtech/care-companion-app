@@ -6,13 +6,17 @@ import { Colors, Images, Layout, WP } from '../../Theme';
 import { useTranslation } from 'react-i18next'
 
 const CustomDropDown = (props) => {
+    console.log('CustomeDropDownProps====', JSON.stringify(props))
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([{ label: 'MADHYA PRADESH', value: 'item1' }, { label: 'PUNJAB', value: 'item2' }, { label: 'MAHARASHATRA', value: 'item3' }, { label: 'KARNATAKA', value: 'item4' }]);
+    console.log('Constantitems====', JSON.stringify(items))
     const { t } = useTranslation()
     let controller;
     return (
         <DropDownPicker
+        // zIndex={5000}
             items={items}
+            
             style={{ transform: [{ rotate: '180deg' }] }}
             arrowColor={Colors.appColor}
             customArrowUp={() => <Image source={Images.forward} style={styles.accessoryUp} />}
@@ -21,6 +25,7 @@ const CustomDropDown = (props) => {
             containerStyle={Layout.dropDownContainer}
             controller={instance => controller = instance}
             onChangeList={(items, callback) => {
+                console.log('OnChangeList====', JSON.stringify(items))
                 new Promise((resolve, reject) => resolve(setItems(items)))
                     .then(() => callback())
                     .catch(() => { });

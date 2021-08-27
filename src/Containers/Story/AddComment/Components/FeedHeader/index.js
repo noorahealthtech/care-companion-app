@@ -7,6 +7,7 @@ import TimeAgo from 'react-native-timeago';
 
 // create a component
 const FeedHeader = (props) => {
+    console.log('FeedHeaderProps====', JSON.stringify(props))
     return (
         <View style={styles.nameProfileContainer}>
             <View style={styles.imageContainer}>

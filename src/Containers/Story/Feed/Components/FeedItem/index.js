@@ -1,6 +1,6 @@
 //import liraries
-import React, { Component, useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, } from 'react-native';
+import React, { Component, useState ,useEffect} from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Colors, Images, WP } from '../../../../../Theme';
 import TimeAgo from 'react-native-timeago';
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,6 +11,10 @@ import { Thumbnail } from 'react-native-thumbnail-video';
 // create a component
 import moment from 'moment'
 const FeedItem = (props) => {
+    console.log("FeddProps====", JSON.stringify(props))
+    console.log('props.feed.user.like',JSON.stringify(props.feed.like))
+    console.log('props.feed.attachment_list', JSON.stringify(props.feed.attachment_list))
+    console.log('props.feed.attachment', JSON.stringify(props.feed.attachment))
     const user = useSelector(state => state.auth.user)
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
@@ -22,15 +26,16 @@ const FeedItem = (props) => {
                 entry_time: moment(new Date()).format('YYYY-MM-DD HH:MM:SS'),
                 session_id: moment(new Date()).format('YYYY-MM-DD HH:MM:SS'),
                 status: props.feed.like ? false : true,
-                token: "j56sugRk029Po5DB",
+                // token: "j56sugRk029Po5DB",
                 appuser_id: user.id,
-                access_token: ""
+                // access_token: ""
             }
             setLoading(true)
             dispatch(addLikesToFeed(params, (success) => {
                 // dispatch(getNurseFeed(user.id, () => {
                 //     setLoading(false)
                 // }))
+                console.log('addLikesToFeed=====', JSON.stringify(params))
                 setLoading(false)
 
             }, (reject) => {
@@ -40,6 +45,7 @@ const FeedItem = (props) => {
 
         })
     }
+
     return (
         <View style={styles.container}>
             <View style={styles.descriptionContainer}>
@@ -58,7 +64,7 @@ const FeedItem = (props) => {
                 </View>
                 <Text allowFontScaling={false} style={styles.description}>{props.feed.description}</Text>
             </View>
-            {props.feed.attachment_list.length > 0 ?
+            {props.feed.attachment_list !== undefined  ?
                 <View style={styles.feedImageContainer}>
                     <TouchableOpacity onPress={() => props.navigation.navigate('YoutubeComponent', { url: props.feed.attachment_list[0].attachment, isVideo: false })}>
 
@@ -102,8 +108,8 @@ const FeedItem = (props) => {
                         <TouchableOpacity style={styles.likesContent}
                             onPress={() => props.navigation.navigate('Likes', props.feed)}
                         >
-                            <Text allowFontScaling={false} style={styles.like}>{props.feed.like_count}</Text>
-                            <Text allowFontScaling={false} style={styles.like}>{props.feed.like_count > 1 ? "Likes" : "Like"}</Text>
+                            <Text allowFontScaling={false} style={styles.like}>{props.feed.user.like_count}</Text>
+                            <Text allowFontScaling={false} style={styles.like}>{props.feed.user.like_count > 1 ? "Likes" : "Like"}</Text>
                         </TouchableOpacity>
                     </View>
                 }
@@ -115,8 +121,8 @@ const FeedItem = (props) => {
                         source={Images.chat}
                         style={styles.icon}
                     />
-                    <Text allowFontScaling={false} style={styles.like}>{props.feed.comment_count}</Text>
-                    <Text allowFontScaling={false} style={styles.like}>{props.feed.comment_count > 1 ? "Comments" : "Comment"}</Text>
+                    <Text allowFontScaling={false} style={styles.like}>{props.feed.user.comment_count}</Text>
+                    <Text allowFontScaling={false} style={styles.like}>{props.feed.user.comment_count > 1 ? "Comments" : "Comment"}</Text>
                 </TouchableOpacity>
             </View>
         </View >

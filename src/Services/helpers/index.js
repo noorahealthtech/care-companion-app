@@ -20,6 +20,7 @@ export const isOnline = (success, reject) => {
   NetInfo.fetch().then(state => {
     console.log("showing online states ", state)
     if (state.isConnected) {
+      console.log('StateISConnected===',state.isConnected )
       success(true)
     } else {
       reject(false)
@@ -146,6 +147,7 @@ export const deviceInformation = (success) => {
       app_version_name: '0.0.25'
     }
     success(deviceInfo)
+    console.log('DeviceInfo===', JSON.stringify(deviceInfo))
   } catch (error) {
 
   }

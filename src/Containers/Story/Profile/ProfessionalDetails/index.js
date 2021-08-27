@@ -6,7 +6,7 @@ import { Colors, WP } from '../../../../Theme';
 import moment from 'moment'
 // create a component
 const ProfessionalDetails = (props) => {
-    console.log("showing props", props)
+    console.log("showing Professional Details props", props)
     const { t } = useTranslation()
     placeholder = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSUz5EWKDu-QHOR3ym0eWBSQenc69_kODInRA&usqp=CAU'
     return (

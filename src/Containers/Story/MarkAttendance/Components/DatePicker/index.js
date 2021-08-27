@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet,Platform } from 'react-native';
 import DatePicker from 'react-native-datepicker'
 import { Colors, WP } from '../../../../../Theme';
 
@@ -12,6 +12,7 @@ const CustomDateTimePicker = (props) => {
 
             <Text allowFontScaling={false} style={styles.title}>{props.title}</Text>
             <DatePicker
+            
                 style={props.isEditClass ? styles.inputFieldEditClass : styles.inputField}
                 date={props.date}
                 mode={'date'}
@@ -22,6 +23,10 @@ const CustomDateTimePicker = (props) => {
                 showIcon={false}
                 onDateChange={(date) => props.onDateChange(date)}
                 customStyles={{
+                    datePicker: {
+        backgroundColor: '#d1d3d8',
+        justifyContent:'center'
+      },
                     dateInput: {
                         borderWidth: 0,
                         alignItems: 'flex-start',

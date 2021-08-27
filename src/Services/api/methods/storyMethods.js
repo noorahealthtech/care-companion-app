@@ -1,174 +1,129 @@
-import Api from '../index';
+import Api from '../index'
 import { endPoints } from '../../index'
 function getNurseContent(params) {
-    return Api(
-        endPoints.getNurseContent,
-        params,
-        'post',
-    );
+  return Api(endPoints.getNurseContent, params, 'post')
 }
+
 function getNurseClass(params) {
-    return Api(
-        endPoints.getNurseClass,
-        params,
-        'post',
-    );
+  console.log('getNurseClass====', JSON.stringify(params))
+  return Api(endPoints.getNurseClass, params, 'post')
 }
-function setContentLikeBulk(params) {
-    return Api(
-        endPoints.setContentLikeBulk,
-        params,
-        'post',
-    );
+function setContentLikeBulk(params) { 
+  console.log('SetContentLikeBulk====', JSON.stringify(params))
+  return Api(endPoints.setContentLikeBulk, params, 'post')
 }
 function getContentComment(params) {
-    return Api(
-        endPoints.getContentComment,
-        params,
-        'post',
-    );
+  console.log('GetContentCommentParamss===', JSON.stringify(params))
+  return Api(endPoints.getContentComment, params, 'post')
 }
 function getContentLikes(params) {
-    return Api(
-        endPoints.getContentLikes,
-        params,
-        'post',
-    );
+  return Api(endPoints.getContentLikes, params, 'post')
 }
 function postContentCommentBulk(params) {
-    return Api(
-        endPoints.postContentCommentBulk,
-        params,
-        'post',
-    );
+  console.log('PostContentComment========', JSON.stringify(params))
+  return Api(endPoints.postContentCommentBulk, params, 'post')
 }
 function getNurseProfile(params) {
-    return Api(
-        endPoints.getNurseProfile,
-        params,
-        'post',
-    );
+  console.log('GetNurseProfile=======', JSON.stringify(params))
+  return Api(endPoints.getNurseProfile, params, 'post')
 }
+
+// function getNurseProfile(params) {
+//   console.log('Login Params===', params)
+//   fetch('http://35.200.144.91/cca/users/show_profile.json', {
+//     method: 'POST',
+//     headers: new Headers({
+//       'Content-Type': 'application/json',
+//       TOKEN: 'j56sugRk029Po5DB',
+//       APITYPE: 1,
+//       'Authorization': 'Bearer RHp1QUEshrkGRU6qHFahdz6rsYOSqdOy0UxwpIjy4Pg'
+//        // <-- Specifying the Content-Type
+//     }),
+//     body: JSON.stringify({
+//       grant_type: 'password',
+//       client_id: 'HtgZ9aPEswoaNqfXLSNlnd9EhAUzmU_ett_MGXqAoHk',
+//       client_secret: '6MkGM8zX4rjk0LTU7vt3pB-hjqhWgX1P8VydKzmvLXI',
+//       mobile_number: '8105739684',
+//       password: 'Noora@123',
+//     }),
+//   })
+//     .then((response) => response.text())
+//     .then((responseText) => {
+//       console.log('NurseNEWContent======',JSON.stringify(responseText))
+//     })
+//     .catch((error) => {
+//       console.error(error)
+//     })
+// }
 function getNurseFullProfile(params) {
-    return Api(
-        endPoints.getNurseFullProfile,
-        params,
-        'post',
-    );
+  return Api(endPoints.getNurseFullProfile, params, 'post')
 }
 
 function getTrainingLanguage(params) {
-    return Api(
-        endPoints.getTrainingLanguage,
-        params,
-        'post',
-    );
+  return Api(endPoints.getTrainingLanguage, params, 'post')
 }
 function getTrainingCourses(params) {
-    return Api(
-        endPoints.getTrainingCourses,
-        params,
-        'post',
-    );
+  console.log('getTrainingCoursesParam===', JSON.stringify(params))
+  return Api(endPoints.getTrainingCourses, params, 'post')
 }
 function submitClass(params) {
-    return Api(
-        endPoints.submitClass,
-        params,
-        'post',
-    );
+  console.log('SubmitParameter======', JSON.stringify(params))
+  return Api(endPoints.submitClass, params, 'post')
 }
 function updateUserSession(params) {
-    return Api(
-        endPoints.updateUserSession,
-        params,
-        'post',
-    );
+  return Api(endPoints.updateUserSession, params, 'post')
 }
 function getMasterData(params) {
-    return Api(
-        endPoints.getMasterData,
-        params,
-        'post',
-    );
+  return Api(endPoints.getMasterData, params, 'post')
 }
 function updateUserContentView(params) {
-    return Api(
-        endPoints.updateUserContentView,
-        params,
-        'post',
-    );
+  return Api(endPoints.updateUserContentView, params, 'post')
 }
 function updateUserProfile(params) {
-    return Api(
-        endPoints.updateUserProfile,
-        params,
-        'post',
-    );
+  console.log('UpdateUserProfileParams====',JSON.stringify(params))
+  return Api(endPoints.updateUserProfile, params, 'post')
 }
 function getCCPLetsPlay(params) {
-    return Api(
-        endPoints.getCCPLetsPlay,
-        params,
-        'post',
-    );
+  return Api(endPoints.getCCPLetsPlay, params, 'post')
 }
 function getCCPToolType(params) {
-    return Api(
-        endPoints.getCCPToolType,
-        params,
-        'post',
-    );
+    console.log('getCCPToolType====', JSON.stringify(params))
+  return Api(endPoints.getCCPToolType, params, 'post')
 }
 function getCCPToolMaterial(params) {
-    return Api(
-        endPoints.getCCPToolMaterial,
-        params,
-        'post',
-    );
+  return Api(endPoints.getCCPToolMaterial, params, 'post')
 }
 function getNurseList(params) {
-    return Api(
-        endPoints.getNurseList,
-        params,
-        'post',
-    );
+  return Api(endPoints.getNurseList, params, 'post')
 }
 function UpdateFcmToken(params) {
-    return Api(
-        endPoints.updateDeviceToken,
-        params,
-        'post',
-        true,
-    );
+  console.log('UpdateFcmToken=====',JSON.stringify(params))
+  return Api(endPoints.updateDeviceToken, params, 'post', true)
 }
 function SearchNurse(params) {
-    return Api(
-        endPoints.searchNurseList,
-        params,
-        'post',
-    );
+  console.log('SearchNurse=====',JSON.stringify(params))
+  return Api(endPoints.searchNurseList, params, 'post')
 }
 export {
-    getNurseContent,
-    getNurseClass,
-    setContentLikeBulk,
-    getContentComment,
-    getContentLikes,
-    postContentCommentBulk,
-    getNurseProfile,
-    getNurseFullProfile,
-    getTrainingLanguage,
-    getTrainingCourses,
-    submitClass,
-    updateUserSession,
-    updateUserContentView,
-    updateUserProfile,
-    getCCPLetsPlay,
-    getCCPToolType,
-    getCCPToolMaterial,
-    getNurseList,
-    getMasterData,
-    UpdateFcmToken,
-    SearchNurse
+  getNurseContent,
+  getNurseClass,
+  setContentLikeBulk,
+  getContentComment,
+  getContentLikes,
+  postContentCommentBulk,
+  getNurseProfile,
+  getNurseFullProfile,
+  getTrainingLanguage,
+  getTrainingCourses,
+  submitClass,
+  updateUserSession,
+  updateUserContentView,
+  updateUserProfile,
+  getCCPLetsPlay,
+  getCCPToolType,
+  getCCPToolMaterial,
+  getNurseList,
+  getMasterData,
+  UpdateFcmToken,
+  SearchNurse,
 }

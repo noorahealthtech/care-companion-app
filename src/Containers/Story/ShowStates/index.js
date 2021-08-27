@@ -14,18 +14,20 @@ import FadeInView from '../../../Components/AnimatedView'
 // create a component
 
 const Home = (props) => {
-    console.log("showing props here", props)
+    console.log("showing props here", JSON.stringify(props))
     const { navigation } = props
     const { t } = useTranslation()
     const user = useSelector(state => state.auth.user)
     const [value, setValue] = useState('item1');
     const [showScreen, setShowScreen] = useState(false)
     const [showScreenUrl, setShowScreenUrl] = useState(false)
+    console.log('Value===', value)
     const renderScreens = () => {
         if (value) {
             switch (value) {
                 case 'item1':
                     setShowScreen(true)
+                    setValue(value)
                     setShowScreenUrl(Images.madhaya)
                     setTimeout(() => {
                         navigation.dispatch(
@@ -38,6 +40,7 @@ const Home = (props) => {
                     break;
                 case 'item2':
                     setShowScreen(true)
+                    setValue(value)
                     setShowScreenUrl(Images.punjab)
                     setTimeout(() => {
                         navigation.dispatch(
@@ -50,6 +53,7 @@ const Home = (props) => {
                     break;
                 case 'item3':
                     setShowScreen(true)
+                    setValue(value)
                     setShowScreenUrl(Images.mahrashtra)
                     setTimeout(() => {
                         navigation.dispatch(

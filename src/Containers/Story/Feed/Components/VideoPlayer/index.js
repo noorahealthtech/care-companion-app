@@ -15,7 +15,8 @@ import Modal from 'react-native-modal';
 import RNFetchBlob from 'rn-fetch-blob';
 
 const YoutubeComponent = (props) => {
-    console.log('props here', props.route.params)
+    console.log('props is video here', props.route.params.isVideo)
+    console.log('props VideoID====', videoId)
     const [videoId, setVideoId] = useState(null)
     const [showImages, SetShowImages] = useState(false)
     const [showLoader, setShowLoader] = useState(false)

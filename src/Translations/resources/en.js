@@ -37,6 +37,7 @@ export default {
   markScreen: {
     title: "Add a New Class",
     uploadText: 'Upload image of the class',
+    textUploaded: 'Image Uploaded',
     date: "Date",
     time: 'Time',
     people: 'Number of People',

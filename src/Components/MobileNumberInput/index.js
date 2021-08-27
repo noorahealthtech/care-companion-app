@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Platform } from 'react-native';
 import { Colors, Images, Layout, WP } from '../../Theme';
 
 // create a component
@@ -49,14 +49,14 @@ const styles = StyleSheet.create({
 
     },
     prefix: {
-        paddingHorizontal: 10,
+        paddingHorizontal:10,
         fontFamily: 'Assistant-Bold',
         color: Colors.grey,
-        fontSize: WP('6.5')
+        fontSize: WP('6.5'),
 
     },
     input: {
-        fontFamily: 'Assistant-SemiBold',
+        fontFamily: 'Assistant-Regular',
         color: Colors.grey,
         fontSize: WP('5'),
         letterSpacing: 10
@@ -65,7 +65,10 @@ const styles = StyleSheet.create({
     placer: {
         fontFamily: 'Assistant-Regular',
         color: Colors.grey,
-        fontSize: WP('4.5'),
+        fontSize: Platform.OS == 'android' ? WP('4') : WP('4.5'),
+        justifyContent: 'center',
+        alignItems: 'center',
+          
     },
     accessory: {
         height: WP('5'),

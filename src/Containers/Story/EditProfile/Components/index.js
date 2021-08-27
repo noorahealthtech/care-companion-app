@@ -6,7 +6,7 @@ import { Colors, WP } from '../../../../Theme';
 
 // create a component
 const MedicalConditionsPicker = (props) => {
-    console.log("showing passed params", props)
+    console.log("showing Medical Conditions passed params", props)
     const [name, setName] = useState(null)
     useEffect(() => {
         if (props.placeholder.length > 0) {
@@ -35,7 +35,7 @@ const MedicalConditionsPicker = (props) => {
 
                 defaultValue={props.value}
                 placeholder={name ? name : 'Tap to select'}
-                onChangeItem={item => { props.setValue(item.value), props.pickedMedicalValue(item) }}
+                onChangeItem={item => { props.setValue(item.value), props.pickedMedicalValue(item), console.log('ItemPicked===', item) }}
             />
 
         </>
