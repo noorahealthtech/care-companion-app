@@ -10,13 +10,15 @@ import ProfessionalDetails from './ProfessionalDetails'
 import { useDispatch, useSelector } from 'react-redux'
 import FocusAwareStatusBar from '../../../Components/FoucsAwareStatusBar'
 import moment from 'moment'
+
 // create a component
 const Profile = (props) => {
     const { t } = useTranslation()
     const user = useSelector(state => state.auth.user)
     const nurserProfile = useSelector(state => state.story.nurseProfile)
     console.log('showing nurse profile=====', JSON.stringify(nurserProfile))
-    console.log('showing nurseProfile name =====', JSON.stringify(nurserProfile.hospital.name))
+    // console.log('showing nurseProfile name =====', JSON.stringify(nurserProfile.hospital_condition))
+     
     const [classesTypes, setClassesTypes] = useState([
         {
             id: 1,
@@ -99,7 +101,8 @@ const Profile = (props) => {
                     dateOfJoining={nurserProfile.hospital_joining_date.match('NA') ? "Joining date not found" : nurserProfile.hospital_joining_date}
                     designation={nurserProfile.designation.match('NA') ? 'Designation not found' : nurserProfile.designation}
                     medical={nurserProfile.hospital_condition.length > 0 ? nurserProfile.hospital_condition : []}
-                    tot={nurserProfile.tot_date.match('NA') ? 'Date of TOT Attended not found' : nurserProfile.tot_date}
+                    tot={nurserProfile.tot_date===null ? 'Date of TOT Attended not found' : nurserProfile.tot_date}
+                    //tot={nurserProfile.tot_date}
                     ccp={nurserProfile.ccp_condition_id ? findById(nurserProfile.ccp_condition_id) : null}
 
                 />

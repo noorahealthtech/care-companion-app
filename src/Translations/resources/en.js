@@ -180,6 +180,5 @@ export default {
     option2: 'Inpatient',
     option3: 'Cardiac',
     option4: 'Oncology',
-
   }
 }

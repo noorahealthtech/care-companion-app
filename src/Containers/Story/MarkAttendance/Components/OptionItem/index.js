@@ -1,5 +1,5 @@
 //import liraries
-import React, { Component, useEffect } from 'react';
+import React, { Component, useEffect,useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Colors, } from '../../../../../Theme';
 import {
@@ -7,15 +7,18 @@ import {
 } from '@/Theme'
 // create a component
 const OptionItem = (props) => {
-
+  console.log('OptionItemProps====', JSON.stringify(props))
+  //const [ccp, setccp] = useState(props.ccp_id) 
+  console.log('OptionItemPropsCCPID====', JSON.stringify(props.ccp_id))
+ 
     useEffect(() => {
 
     }, [props.classes])
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => props.onPress(props.classes)}
+            <TouchableOpacity onPress={() => {props.onPress(props.classes)}}
             >
-                {props.classes.isSelected ?
+                {props.classes.isSelected || (props.ccp_id == props.classes.id) ?
                     <View style={styles.container}>
                         <Image
                             style={[styles.selectedImages, props.isEditProfile ? { tintColor: Colors.secondaryColor } : null]}

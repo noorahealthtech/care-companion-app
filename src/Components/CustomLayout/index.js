@@ -11,7 +11,7 @@ const CustomLayout = (props) => {
     const toggleDrawer = () => props.navigation.toggleDrawer();;
     const onBackBtnPressed = () => props.navigation.goBack()
     return (
-        <KeyboardAwareScrollView contentContainerStyle={styles.container}>
+        <View style={styles.container}>
             {
                 !props.isLogin ?
                     props.showBackbtn ?
@@ -84,7 +84,7 @@ const CustomLayout = (props) => {
             <View style={[props.isLogin ? styles.contentContainerLogin : styles.contentContainer, props.contentContainer]}>
                 {props.children}
             </View>
-        </KeyboardAwareScrollView >
+        </View>
     );
 };
 
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.white
     },
     logoContainer: {
-        flex: 2,
+        flex: 1.6,
         padding: WP('5'),
         alignItems: 'center',
         justifyContent: 'space-between',

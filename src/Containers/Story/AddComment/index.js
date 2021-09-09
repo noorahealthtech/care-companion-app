@@ -27,6 +27,8 @@ const AddComments = ({ route, navigation }) => {
     const [taggedId, setTaggedId] = useState(null)
    console.log('coments====',JSON.stringify(comments))
    console.log('user.id===',JSON.stringify(user.id) )
+   //const nurserProfile = useSelector(state => state.story.nurseProfile)
+   //console.log('Profile Name ===',nurserProfile.nurserProfile.nurse.first_name )
     useEffect(() => {
         setAddedComments(null)
         isOnline((connected) => {
@@ -44,9 +46,9 @@ const AddComments = ({ route, navigation }) => {
         try {
             // if (addedComments) {
             if (comment) {
-                // console.log('AddedComments==',addedComments)
-                console.log('AddedComments==',comment)
-                let parameter = {
+                console.log('AddedComments==',addedComments)
+                console.log('Comments==',comment)
+                let parameter = {   
                     user_id: user.id,
                     content_id: params.id,
                     comment: comment,
@@ -64,8 +66,12 @@ const AddComments = ({ route, navigation }) => {
                 isOnline((connected) => {
                     dispatch(addComments(parameter, (success) => {
                         console.log('CommentAddResponse======', JSON.stringify(parameter))
+                        
+                            
                         dispatch(fetchNurseComments(user.id, params.id, (comments) => { setLoading(false), setComments(comments) }, () => { setLoading(false) }))
                         setAddedComments(null)
+                    
+                        
                     }, () => { setLoading(false), showToast('Please tap post again!') }))
 
                     console.log("ParameterOFComment==="+ JSON.stringify(parameter));
@@ -83,6 +89,7 @@ const AddComments = ({ route, navigation }) => {
         }
         catch (error) {
             console.log("shpwing error here", error)
+            alert("Something went wrong!")
 
         }
     }

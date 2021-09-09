@@ -8,7 +8,7 @@ import { Colors, WP } from '../../../Theme';
 // create a component
 const PreferredLanguage = (props) => {
     const { params } = props.route
-    console.log('Params========', JSON.stringify(params))
+    console.log('Params Preferred Lannguage ========', JSON.stringify(params))
     const { t } = useTranslation()
     const navigateCourse = () => props.navigation.navigate('CcpToolsDetails', { ccp: params.ccp })
 

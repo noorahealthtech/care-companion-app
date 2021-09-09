@@ -13,10 +13,12 @@ const FeedListing = (props) => {
                 extraData={props.feeds.sort((a,b)=> moment(b.entry_time).format('YYYY-MM-DD') > moment(a.entry_time).format('YYYY-MM-DD'))}
         
                 renderItem={({ item }) => (
+
                     <FeedItem
                         feed={item}
                         navigation={props.navigation}
                     />
+
                 )}
                 {...props}
 

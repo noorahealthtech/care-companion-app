@@ -68,8 +68,6 @@ const YoutubeComponent = (props) => {
 
     const onBackBtnPressed = () => props.navigation.goBack()
 
-
-
     const tester = () => {
         if (Platform.OS === 'android') {
             handleDownload()

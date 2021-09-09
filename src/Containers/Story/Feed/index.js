@@ -18,7 +18,7 @@ const Feed = (props) => {
     const user = useSelector(state => state.auth.user)
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
-    console.log("showing data in feeds", nurseFeed)
+    console.log("showing data in feeds", JSON.stringify(nurseFeed))
 
     const navigation = useNavigation()
     

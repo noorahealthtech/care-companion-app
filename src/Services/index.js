@@ -34,6 +34,7 @@ export {
   getTrainingLanguage,
   getTrainingCourses,
   submitClass,
+  editClass,
   updateUserSession,
   updateUserContentView,
   updateUserProfile,

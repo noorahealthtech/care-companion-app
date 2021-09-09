@@ -11,13 +11,10 @@ import { Thumbnail } from 'react-native-thumbnail-video';
 // create a component
 import moment from 'moment'
 const FeedItem = (props) => {
-    console.log("FeddProps====", JSON.stringify(props))
-    console.log('props.feed.user.like',JSON.stringify(props.feed.like))
-    console.log('props.feed.attachment_list', JSON.stringify(props.feed.attachment_list))
-    console.log('props.feed.attachment', JSON.stringify(props.feed.attachment))
-    const user = useSelector(state => state.auth.user)
-    const dispatch = useDispatch()
-    const [loading, setLoading] = useState(false)
+    console.log('Feed=====', JSON.stringify(props.feed));
+    const user = useSelector(state => state.auth.user);
+    const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
     const addLike = () => {
         isOnline((online) => {
             let params = {
@@ -25,17 +22,21 @@ const FeedItem = (props) => {
                 content_id: props.feed.id,
                 entry_time: moment(new Date()).format('YYYY-MM-DD HH:MM:SS'),
                 session_id: moment(new Date()).format('YYYY-MM-DD HH:MM:SS'),
-                status: props.feed.like ? false : true,
+                status: props.feed.user.like ? false : true,
                 // token: "j56sugRk029Po5DB",
                 appuser_id: user.id,
                 // access_token: ""
             }
             setLoading(true)
             dispatch(addLikesToFeed(params, (success) => {
-                // dispatch(getNurseFeed(user.id, () => {
-                //     setLoading(false)
-                // }))
+
+                // refersh code after clicking on like 
+                dispatch(getNurseFeed(user.id, () => {
+                    setLoading(false)
+                }))
+
                 console.log('addLikesToFeed=====', JSON.stringify(params))
+                console.log('addLikesToFeedLike=====', props.feed.user.like_count)
                 setLoading(false)
 
             }, (reject) => {
@@ -77,12 +78,15 @@ const FeedItem = (props) => {
                 </View>
                 :
                 props.feed.attachment ?
-                    <TouchableOpacity onPress={() => props.navigation.navigate('YoutubeComponent', { url: props.feed.attachment, isVideo: true })}>
-                        <Thumbnail url={props.feed.attachment} />
+                    <TouchableOpacity >
+                    <Thumbnail onPress={()=> props.navigation.navigate('YoutubeComponent', { url: props.feed.attachment, isVideo: true })} url={props.feed.attachment} />
+                        
+                    
                     </TouchableOpacity>
-                    :
-                    null
 
+                    
+                    
+   :null
             }
             {/* <TouchableOpacity style={styles.likesContainer}
                 onPress={() => props.navigation.navigate('Likes', props.feed)}
@@ -98,18 +102,20 @@ const FeedItem = (props) => {
                     :
                     <View style={styles.iconContainer}>
                         <TouchableOpacity
-                            onPress={addLike}
-                        >
+                            onPress={addLike}>
                             <Image
-                                source={props.feed.like ? Images.likeFilled : Images.likeEmpty}
-                                style={[styles.icon, { tintColor: props.feed.like ? Colors.appColor : Colors.black }]}
+                                source={props.feed.user.like ? Images.likeFilled : Images.likeEmpty}
+                                style={[styles.icon, { tintColor: props.feed.user.like ? Colors.appColor : Colors.black }]}
                             />
                         </TouchableOpacity>
+
                         <TouchableOpacity style={styles.likesContent}
                             onPress={() => props.navigation.navigate('Likes', props.feed)}
                         >
-                            <Text allowFontScaling={false} style={styles.like}>{props.feed.user.like_count}</Text>
-                            <Text allowFontScaling={false} style={styles.like}>{props.feed.user.like_count > 1 ? "Likes" : "Like"}</Text>
+                            <Text allowFontScaling={false} style={styles.like}>{props.feed.like_count}</Text>
+                            <Text allowFontScaling={false} style={styles.like}>{props.feed.like_count > 1 ? "Likes" : "Like"}</Text>
+                            
+                            
                         </TouchableOpacity>
                     </View>
                 }

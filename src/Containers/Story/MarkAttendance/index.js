@@ -25,7 +25,7 @@ const MarkAttendance = (props) => {
     let now = new Date();   
     const [date, SetDate] = useState(new Date())
     const [time, SetTime] = useState('')
-    const [people, SetPeople] = useState(null)
+    const [people, SetPeople] = useState('')
     const [location, SetLocation] = useState(null)
     const [session, SetSession] = useState(null)
     const [notes, SetNotes] = useState(null)
@@ -184,7 +184,7 @@ const MarkAttendance = (props) => {
                     // console.log("showing Submit Params here", params)
                     isOnline((connected) => {
                         dispatch(markAttendance(params, (response) => {
-                            console.log("showing Submit Mark Params here", params)
+                            console.log("showing Submit Mark Attandance Params here", JSON.stringify(params))
                             if (response) {
 
                                 SetPeople(null)

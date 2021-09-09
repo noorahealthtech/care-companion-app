@@ -11,7 +11,7 @@ import TimePicker from '../MarkAttendance/Components/TimePicker'
 import CustomDateTimePicker from '../MarkAttendance/Components/DatePicker'
 import OptionsListing from '../MarkAttendance/Components/OptionsList'
 import moment from 'moment'
-import { markAttendance, getFullData } from '../../../Store/actions'
+import { editAttendance, getFullData } from '../../../Store/actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { navigate } from '../../../Services'
 import { showToast, getPicture, isOnline } from '../../../Services'
@@ -84,6 +84,7 @@ const EditClassDetails = ({ route, navigation }) => {
   }
 
   useEffect(() => {
+    
     setDate(moment(params.class_date,'YYYY-MM-DD').format('DD MMM YYYY'))
     setTime(params.class_time)
     setNumberOfPeople(params.no_of_people)
@@ -122,28 +123,38 @@ const EditClassDetails = ({ route, navigation }) => {
         isOnline(
           (connected) => {
             dispatch(
-             
-              markAttendance(
+              editAttendance(
                 parameter,
                 setLoading,
                 (done) => {
                   if (done) {
                     setLoading(false)
-                    dispatch(
-                      getFullData(
-                        user.id,
-                        parameter,
-                        () => {
-                          // dispatch({
-                          //   type: TYPES.NURSE_PREVIOUS_CLASSES,
-                          //   previousClasses: api.details
-                          // })
-                          navigate('PreviousClasses')
-                        },
+                    // dispatch(
+                    //   getFullData(
+                    //     user.id,
+                    //     parameter,
+                    //     () => {
+                    //       dispatch({
+                    //         type: TYPES.NURSE_PREVIOUS_CLASSES,
+                    //         previousClasses: api.details
+                    //       })
+                    //       navigate('PreviousClasses')
+                    //     },
                        
-                        () => {},
-                      ),
-                    )
+                    //     () => {},
+                    //   ),
+                    // )
+                    isOnline((connected) => {
+                      dispatch(getFullData(user.id,parameter, () => {
+                        dispatch({
+                                  type: TYPES.NURSE_PREVIOUS_CLASSES,
+                                  previousClasses: api.details
+                                })
+                          navigation.navigate('PreviousClasses')
+                      }, () => { }))
+                  }, (offline) => {
+                      showToast(t('commonApp.internetError'))
+                  })
                     console.log('showing Editparams passsed=====', JSON.stringify(parameter))
                   }
                 },

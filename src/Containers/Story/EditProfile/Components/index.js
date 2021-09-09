@@ -6,20 +6,27 @@ import { Colors, WP } from '../../../../Theme';
 
 // create a component
 const MedicalConditionsPicker = (props) => {
-    console.log("showing Medical Conditions passed params", props)
+    console.log("showing Medical Conditions passed params", JSON.stringify(props))
     const [name, setName] = useState(null)
+    const [open, setOpen] = useState(false);
     useEffect(() => {
         if (props.placeholder.length > 0) {
             setName(props.placeholder[0].name)
         }
     }, [])
+    console.log("props.setValue ====> ", JSON.stringify(props.setValue))
     return (
         <>
             <Text allowFontScaling={false} style={styles.title}>{props.title}</Text>
             <DropDownPicker
-                zIndex={5000}
+                // zIndex={5000}
                 style={styles.inputField}
+                // items={name}
                 showArrow={false}
+                setValue={props.setValue}
+                open={open}
+                value={props.value}
+                setOpen={setOpen}
                 items={props.items}
                 labelStyle={{
                     fontSize: WP('4'),
@@ -27,15 +34,24 @@ const MedicalConditionsPicker = (props) => {
                     fontFamily: 'Assistant-Regular'
                 }}
                 controller={instance => controller = instance}
-                onChangeList={(items, callback) => {
-                    new Promise((resolve, reject) => resolve(props.setItems(items)))
-                        .then(() => callback())
-                        .catch(() => { });
+                // onChangeList={(items, callback) => {
+                //     console.log('MedicalPickITems====', JSON.stringify(items))
+                //     new Promise((resolve, reject) => resolve(props.setItems(items)))
+                //         .then(() => callback())
+                //         .catch(() => { });
+                // }}
+                setItems={(items, callback) => {
+                console.log('OnChangeList====', JSON.stringify(items))
+                new Promise((resolve, reject) => resolve(props.setItems(items)))
+                    .then(() => callback())
+                    .catch(() => { });
                 }}
-
                 defaultValue={props.value}
                 placeholder={name ? name : 'Tap to select'}
-                onChangeItem={item => { props.setValue(item.value), props.pickedMedicalValue(item), console.log('ItemPicked===', item) }}
+                onChangeValue={(item) => {
+                    props.pickedMedicalValue(item)
+                }}
+                // onChangeItem={item => { props.setValue(item.value), props.pickedMedicalValue(item), console.log('ItemPicked===', item) }}
             />
 
         </>

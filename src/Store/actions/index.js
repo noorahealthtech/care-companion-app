@@ -10,6 +10,7 @@ export {
     getNurseFeed,
     fetchNurseProfile,
     markAttendance,
+    editAttendance,
     updateUserProfiles,
     getFullData,
     fetchNurseComments,

@@ -44,6 +44,7 @@ export const endPoints = {
   getNurseClass: 'get_ccp_classes.json',
   updateDeviceToken: 'update_device_token.json',
   submitClass: 'create_class.json',
+  editClass: 'update_ccp_class.json',
   searchNurseList: 'search_user.json',
 
   // getNurseFullProfile: 'getNurseFullProfile',

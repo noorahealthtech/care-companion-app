@@ -17,6 +17,7 @@ function getContentComment(params) {
   return Api(endPoints.getContentComment, params, 'post')
 }
 function getContentLikes(params) {
+  console.log('GetContentLikesParamss===', JSON.stringify(params))
   return Api(endPoints.getContentLikes, params, 'post')
 }
 function postContentCommentBulk(params) {
@@ -70,6 +71,10 @@ function submitClass(params) {
   console.log('SubmitParameter======', JSON.stringify(params))
   return Api(endPoints.submitClass, params, 'post')
 }
+function editClass(params) {
+  console.log('EditParameter======', JSON.stringify(params))
+  return Api(endPoints.editClass, params, 'post')
+}
 function updateUserSession(params) {
   return Api(endPoints.updateUserSession, params, 'post')
 }
@@ -116,6 +121,7 @@ export {
   getTrainingLanguage,
   getTrainingCourses,
   submitClass,
+  editClass,
   updateUserSession,
   updateUserContentView,
   updateUserProfile,

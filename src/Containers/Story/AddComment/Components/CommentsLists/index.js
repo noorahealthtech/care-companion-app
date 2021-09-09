@@ -10,41 +10,41 @@ const CommentsListings = (props) => {
 console.log('propsCommentsList===', JSON.stringify(props));
 // props.feeds.sort((a,b)=> moment(b.entry_time).format('YYYY-MM-DD') > moment(a.entry_time).format('YYYY-MM-DD'))
     return (
-        // <ScrollView contentContainerStyle={styles.container}
-        //     showsVerticalScrollIndicator={false}
-        // >
+        <ScrollView contentContainerStyle={styles.container}
+            showsVerticalScrollIndicator={false}
+        >
     
-        //     {props.comments.map((comment) => {
-        //         console.log("Comment respnse : "+JSON.stringify(comment))
-        //         return (
-        //             <CommentItem
-        //                 comment={comment}
-        //             />
-        //         )
-                
-        //     })}
-        // </ScrollView>
-        <View style={styles.container}>
-            <FlatList
-                data={
-                    props.comments.sort((a,b) => 
-                    moment(b.entry_time,'YYYY-MM-DD hh:mm') > 
-                    moment(a.entry_time,'YYYY-MM-DD hh:mm'))
-                }
-                // extraData={props.comments.sort((a,b)=> moment(b.entry_time,).format('YYYY-MM-DD') > moment(a.entry_time).format('YYYY-MM-DD'))}
-        
-                renderItem={({ item }) => (
+            {props.comments.map((comment) => {
+                console.log("Comment respnse : "+JSON.stringify(comment))
+                return (
                     <CommentItem
-                      comment={item}
-                        // navigation={props.navigation}
+                        comment={comment}
                     />
-                )}
-                {...props}
+                )
+                
+            })}
+        </ScrollView>
+        // <View style={styles.container}>
+        //     <FlatList
+        //         data={
+        //             props.comments.sort((a,b) => 
+        //             moment(b.entry_time,'YYYY-MM-DD hh:mm') > 
+        //             moment(a.entry_time,'YYYY-MM-DD hh:mm'))
+        //         }
+        //         // extraData={props.comments.sort((a,b)=> moment(b.entry_time,).format('YYYY-MM-DD') > moment(a.entry_time).format('YYYY-MM-DD'))}
+        
+        //         renderItem={({ item }) => (
+        //             <CommentItem
+        //               comment={item}
+        //                 // navigation={props.navigation}
+        //             />
+        //         )}
+        //         {...props}
 
-                keyExtractor={item => item.id}
+        //         keyExtractor={item => item.id}
             
-            />
-        </View>
+        //     />
+        // </View>
     );
 };
 

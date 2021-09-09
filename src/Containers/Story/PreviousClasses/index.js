@@ -15,16 +15,20 @@ const PreviousClasses = (props) => {
     const { t } = useTranslation()
     const previousClasses = useSelector(state => state.story.classesDetails)
     console.log('previousClass======', JSON.stringify(previousClasses))
-    console.log("showing previous classes in content", previousClasses)
+    console.log("showing previous classes Sessions", previousClasses.session_conducted)
     var msgTotal
     if (previousClasses.length > 0) {
+        console.log('InsidePreviousClass====')
         previousClasses.map((entry) => {
             entry.no_of_people = parseInt(entry.no_of_people)
+            console.log('EntryNoOfPeople===',JSON.stringify(parseInt(entry.no_of_people) !== null))
         })
+        console.log('PatientForPreviousClassCount==',JSON.stringify(previousClasses))
         msgTotal = previousClasses.reduce(function (prev, cur) {
             return prev + cur.no_of_people;
         }, 0);
         console.warn(msgTotal)
+        console.log('TotalMsg====',JSON.stringify(msgTotal))
     }
 
     useEffect(() => {

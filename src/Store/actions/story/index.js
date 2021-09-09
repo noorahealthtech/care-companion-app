@@ -19,6 +19,7 @@ export const getNurseFeed = (nurseId, setLoading) => {
         password: 'Noora@123',
       }
       let api = await storyApi.getNurseContent(params)
+      console.log('GetNurseFeedParams=====', JSON.stringify(params))
       console.log('GetNurseFeed=====', JSON.stringify(api))
       if (api.success) {
         console.log('api.success====',api)
@@ -103,17 +104,52 @@ export const markAttendance = (params, setLoading, done, isEditProfile) => {
     }
   }
 }
-
+export const editAttendance = (params, setLoading, done, isEditProfile) => {
+  return async (dispatch) => {
+    try {
+      console.log('SubmitEditParams=======', JSON.stringify(params))
+      let api = await storyApi.editClass(params)
+      console.log(
+        'EditApiCall====',
+        JSON.stringify(api),
+      )
+      if (api) {
+       console.log('Inside Api Success=====', JSON.stringify(api))
+        setLoading(true)
+        if (isEditProfile) {
+          done(true)
+          Util.navigate('PreviousClasses')
+        } else {
+          console.log('Inside Go to Navigate')
+          // Util.navigate('PreviousClasses')
+        }
+      } else {
+        setLoading(false)
+        if (isEditProfile) {
+          done(false)
+        }
+      }
+    } catch (error) {
+      setLoading(false)
+      if (isEditProfile) {
+        done(false)
+      }
+      console.log('showing error', error)
+    }
+  }
+}
 //Update nurse profile
 export const updateUserProfiles = (params,success, reject) => {
   console.log('Update Params====', params)
   return async (dispatch) => {
     try {
       let api = await storyApi.updateUserProfile(params)
-      console.log('shwoing response UpdateUserProfile here after submit=====', api)
+      console.log('shwoing response UpdateUserProfile here after submit=====', JSON.stringify(api))
       if (api.success) {
         success(true)
+        console.log('Success===========')
       } else {
+        console.log('Reject===========')
         reject(true)
       }
     } catch (error) {
@@ -291,6 +327,7 @@ export const addComments = (params, success, reject) => {
       console.log('AddCommentApi=====', JSON.stringify(api))
       if (api) {
         success(api.details)
+        console.log('ApiCommentDetails====', JSON.stringify(api.details))
       } else {
         reject(true)
       }
@@ -351,7 +388,7 @@ export const fetchCCPMaterials = (userId, success, reject) => {
         password: 'Noora@123',
       }
       let api = await storyApi.getCCPToolMaterial(params)
-      console.log('shwoing response getCCPTool Material here for submit', api)
+      console.log('shwoing response getCCPTool Material here for submit', JSON.stringify(api))
       if (api.success) {
         success(api.details)
       } else {

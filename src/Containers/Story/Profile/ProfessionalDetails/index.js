@@ -20,11 +20,8 @@ const ProfessionalDetails = (props) => {
             <Text style={styles.questions}>{t('profile.medical')} :
             {
                     props.medical.length > 0 ?
-                        props.medical.map((condition) => {
-                            return (
-                                <Text style={styles.details}>    {condition.name}</Text>
-                            )
-                        })
+                        
+                        <Text style={styles.details}> {props.medical[0].name}</Text>
                         :
                         <Text style={styles.details}>    {'Condition not found'}</Text>
 

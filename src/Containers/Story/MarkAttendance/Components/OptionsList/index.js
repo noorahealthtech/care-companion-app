@@ -17,7 +17,7 @@ const OptionsListing = (props) => {
             <View style={styles.container}>
                 {props.classesTypes.map((type) => {
                     return (
-                        <OptionItem classes={type} onPress={(tapped) => { props.onPress(tapped) }} isEditProfile={props.isEditProfle} />
+                        <OptionItem classes={type} ccp_id={props.ccp_id} onPress={(tapped) => { props.onPress(tapped) }} isEditProfile={props.isEditProfle} />
                     )
                 })}
             </View >

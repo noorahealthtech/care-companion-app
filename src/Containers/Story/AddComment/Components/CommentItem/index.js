@@ -12,20 +12,21 @@ const CommentItem = (props) => {
   // const [state, SetState] = useState(false)
 
 
-  console.log('Props=====', JSON.stringify(props.comment))
+  console.log('PropsComment=====', JSON.stringify(props.comment.comment))
+  
   let year = moment(props.comment.entry_time).format('YYYY-MM-DD')
   let time = moment(props.comment.entry_time).format('hh:mm:ss')
   var updateTime = props.comment.entry_time
   var convertTimeIntoDate = new Date(updateTime)
  
 
-  var string = props.comment.comment
-  var subString = string.split(" ");
+  // var string = props.comment.comment
+  // var subString = string.split(" ");
 
-  for (let index = 0; index < subString.length; index++) {
-     element = subString[index].includes('@');
-  }
-   console.log('Element=====', element)
+  // for (let index = 0; index < subString.length; index++) {
+  //    element = subString[index].includes('@');
+  // }
+  //  console.log('Element=====', element)
 
   // var string = second.split(" ")
   // var str = string.slice(0)

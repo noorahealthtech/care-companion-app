@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component, useState, useEffect } from 'react';
-import { View, Text, StyleSheet, StatusBar, Image, Animated } from 'react-native';
+import { View, Text, StyleSheet, StatusBar, Image, Animated,Platform } from 'react-native';
 import { CustomLayout, CustomButton, CustomDropDown } from '@/Components'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
@@ -87,6 +87,13 @@ const Home = (props) => {
     }
     return (
         <>
+        {/* <View style={{justifyContent:'center',alignItems:'center',height:'100%',width:'100%'}}>
+        <CustomDropDown
+                        value={value}
+                        setValue={(selectedState) => setValue(selectedState)}
+                    />
+        </View> */}
+        
             {showScreen ?
                 <FadeInView style={styles.container}>
                     <Image
@@ -96,14 +103,16 @@ const Home = (props) => {
                 </FadeInView>
 
                 :
-                <CustomLayout
+                <CustomLayout                    
                     isWelcome={true}
                 >
                     <Headings />
+                    
                     <CustomDropDown
                         value={value}
                         setValue={(selectedState) => setValue(selectedState)}
                     />
+                    
                     <CustomButton
                         title={t('states.button2')}
                         onPress={renderScreens}
@@ -118,7 +127,7 @@ const Home = (props) => {
 // define your styles
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 1
     },
     Image: {
         flex: 1,
