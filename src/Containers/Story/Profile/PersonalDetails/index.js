@@ -16,13 +16,13 @@ const PersonalDetails = (props) => {
             <Text allowFontScaling={false} style={styles.title}>{t('profile.personal')}</Text>
             <View style={styles.nameContainer}>
                 <Text allowFontScaling={false} style={styles.name}>{props.name}</Text>
-                <AvatarContainer profilePicture={props.profilePicture} />
+                <AvatarContainer profilePicture={props.profilePicture} isEdit />
             </View>
             <Text style={styles.questions}>{t('profile.phone')} :    <Text style={styles.details}>{props.phone}</Text></Text>
             <Text style={styles.questions}>{t('profile.date')} :    <Text style={styles.details}>{moment(props.date).format('YYYY-MM-DD')}</Text></Text>
             <Text style={styles.questions}>{t('profile.status')} :    <Text style={styles.details}>{props.status}</Text> </Text>
-            <Text style={styles.questions}>{t('profile.year')} :    <Text style={styles.details}>{props.year}</Text></Text>
-            <Text style={styles.questions}>{t('profile.trainer')} :    <Text style={styles.details}>{props.trainer}</Text></Text>
+            {/* <Text style={styles.questions}>{t('profile.year')} :    <Text style={styles.details}>{props.year}</Text></Text>
+            <Text style={styles.questions}>{t('profile.trainer')} :    <Text style={styles.details}>{props.trainer}</Text></Text> */}
         </View>
     );
 };

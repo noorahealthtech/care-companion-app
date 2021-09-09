@@ -27,7 +27,10 @@ function getNurseProfile(params) {
   console.log('GetNurseProfile=======', JSON.stringify(params))
   return Api(endPoints.getNurseProfile, params, 'post')
 }
-
+function editClass(params) {
+  console.log('EditParameter======', JSON.stringify(params))
+  return Api(endPoints.editClass, params, 'post')
+}
 // function getNurseProfile(params) {
 //   console.log('Login Params===', params)
 //   fetch('http://35.200.144.91/cca/users/show_profile.json', {
@@ -104,6 +107,19 @@ function SearchNurse(params) {
   console.log('SearchNurse=====',JSON.stringify(params))
   return Api(endPoints.searchNurseList, params, 'post')
 }
+// For Nurse Session 
+function submitSession(params){
+  console.log('submitSessionParameter======', JSON.stringify(params))
+  return Api(endPoints.submitSession, params, 'post')
+}
+function editSession(params) {
+  console.log('editSessionParameter======', JSON.stringify(params))
+  return Api(endPoints.editSession, params, 'post')
+}
+function getNurseSession(params) {
+  console.log('getNurseSession====', JSON.stringify(params))
+  return Api(endPoints.getNurseSession, params, 'post')
+}
 export {
   getNurseContent,
   getNurseClass,
@@ -126,4 +142,8 @@ export {
   getMasterData,
   UpdateFcmToken,
   SearchNurse,
+  editClass,
+  submitSession,
+  editSession,
+  getNurseSession
 }

@@ -50,12 +50,13 @@ const Home = (props) => {
         >
             <Headings />
             <CustomButton
-                onPress={() => props.navigation.navigate('MarkAttendance')}
+                onPress={() => props.navigation.navigate('Sessions')}
                 title={t('home.button1')}
             />
             <CustomButton
                 title={t('home.button2')}
-                onPress={fetchFeed}
+                // onPress={fetchFeed}
+                onPress={() => props.navigation.navigate('Profile')}
             />
         </CustomLayout>
     );

@@ -5,7 +5,7 @@ import { Colors, Images, WP } from '../../../../../Theme'
 import TimeAgo from 'react-native-timeago'
 import moment from 'moment'
 import { color } from 'react-native-reanimated'
-import TwitterTextView from "react-native-twitter-textview";
+import { MentionInput, Tag ,Mention,MentionInputContext} from 'react-native-complete-mentions'
 // create a component
 var element = ''
 const CommentItem = (props) => {
@@ -81,16 +81,21 @@ const CommentItem = (props) => {
           <Text allowFontScaling={false} style={styles.posted}>{moment(props.comment.entry_time).fromNow()}</Text>
         </View>
       </View>
-      {/* <Text allowFontScaling={false} style={styles.comment}>
+      <Text allowFontScaling={false} style={styles.comment}>
         {props.comment.comment} 
-     
-      </Text> */}
-      <TwitterTextView
-      style={styles.comment}
-        mentionStyle={styles.mentionStyle}
-      >
-        {props.comment.comment}
-      </TwitterTextView>
+        {/* {props.comment.comment.substr(0, props.comment.comment.indexOf('@'))} */}
+      </Text>
+      {/* <Tag
+            tag="@"
+            extractCommit={props.comment.comment}
+            renderText={(mention) => (
+              <Text style={{color:'red'}}>{mention}</Text>
+            )}
+            // formatText={(text) => `@${text}`}
+            formatText={text => <Text style={{color:'red'}}>{text}</Text>}
+            extractString={(mention) => `@[${mention}]`}
+          />
+     */}
     </View>
   )
 }
@@ -100,9 +105,6 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     padding: WP('5'),
-  },
-  mentionStyle: {
-    color: '#faaf1b'
   },
   header: {
     display: 'flex',

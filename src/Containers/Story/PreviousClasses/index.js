@@ -51,6 +51,7 @@ const PreviousClasses = (props) => {
             />
             {previousClasses.length > 0 ?
                 <PreviousClassesList classes={previousClasses} onPress={(item) => props.navigation.navigate('EditClassDetails', item)} />
+                
                 :
                 <View style={styles.noImageContainer}>
                     <Image
@@ -61,7 +62,7 @@ const PreviousClasses = (props) => {
 
 
             }
-            <CustomButton title={t('previousclasses.button')}
+            <CustomButton title={t('previousclasses.button1')}
                 bgColor={Colors.appColor} titleColor={Colors.white}
                 onPress={() => props.navigation.navigate('MarkAttendance')}
                 containerStyles={styles.btnContainer}

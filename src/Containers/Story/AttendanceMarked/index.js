@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import Headings from './Components/Heading'
 import { Colors } from '../../../Theme';
 import { getFullData } from '../../../Store/actions'
-import { isOnline, showToast } from '../../../Services'
+import { isOnline, navigate, showToast } from '../../../Services'
 import { useDispatch, useSelector } from 'react-redux'
 
 // create a component
@@ -36,7 +36,9 @@ const AttendanceMarked = (props) => {
                 titleColor={Colors.black}
             />
             <CustomButton
-                
+            onPress={() => {
+              navigate('Profile');
+            }}
                 title={t('attendanceMarked.button2')}
                 titleColor={Colors.black}
             />

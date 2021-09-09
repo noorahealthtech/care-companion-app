@@ -52,6 +52,7 @@ const ClassesItems = (props) => {
                     />
                 </View>
                 <Text allowFontScaling={false} style={styles.course}>{props.classDetails.class_type.name}</Text>
+                 {/* <Text allowFontScaling={false} style={styles.course}>{'TB'}</Text> */}
             </TouchableOpacity >
         </View>
 

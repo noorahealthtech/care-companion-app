@@ -58,6 +58,11 @@ const CustomLayout = (props) => {
                             source={Images.logo}
                             style={styles.logo}
                         />
+                          <Image
+                            source={require('../../Assets/Images/Jhpiegologo.png')}
+                            style={styles.ImageJapango}
+                        />
+                        
                     </View>
                     :
                     <View style={[props.showBackbtn ? styles.logoContainerBackBtn : styles.logoContainer, !props.isLogin && !props.showBackbtn ? { alignItems: 'center', justifyContent: 'center' } : null, props.logoStyles]}>
@@ -98,7 +103,10 @@ const styles = StyleSheet.create({
         flex: 2,
         padding: WP('5'),
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'space-around',
+        // flexDirection: 'column',
+        // backgroundColor: 'red'
+
     },
     logoContainerBackBtn: {
         flex: 2,
@@ -121,10 +129,21 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     logo: {
-        height: WP('90'),
-        width: WP('90'),
+        height: WP('70'),
+        width: WP('70'),
         resizeMode: 'contain',
-        // marginTop: WP('12'),
+        // marginTop: WP('25'),
+        // marginBottom: WP('25'),
+        margin: WP('25')
+    },
+    ImageJapango: {
+        height: WP('50'),
+        width: WP('50'),
+        marginBottom: 200,
+        resizeMode: 'contain',
+        margin: WP('10')
+        // marginTop: WP('25'),
+        // marginBottom: WP('25'),
     },
     welcome: {
         height: WP('90'),
@@ -194,6 +213,7 @@ const styles = StyleSheet.create({
     marked: {
         height: WP('90'),
         width: WP('90'),
+        marginTop:122,
         resizeMode: 'contain',
     },
     drawerContent: {

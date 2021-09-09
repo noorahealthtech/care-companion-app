@@ -41,6 +41,10 @@ export {
   getCCPToolType,
   getCCPToolMaterial,
   getNurseList,
+  editClass,
+  getNurseSession,
+  submitSession,
+  editSession
 } from './api/methods/storyMethods'
 export {
   navigate, push

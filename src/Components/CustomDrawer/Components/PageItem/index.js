@@ -5,7 +5,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Colors, WP } from '../../../../Theme';
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchNurseProfile, getNurseFeed, getFullData } from '../../../../Store/actions'
+import { fetchNurseProfile, getNurseFeed, getFullData,getSessionData } from '../../../../Store/actions'
+
 import { isOnline, ShowActivityIndicator, showToast } from '../../../../Services'
 // create a component
 
@@ -13,7 +14,7 @@ const PageItem = (props) => {
     const { t } = useTranslation()
     const dispatch = useDispatch()
     const user = useSelector(state => state.auth.user)
-    console.log('User=====', user)
+    console.log('UserID=====', user.id)
     console.log('showing props', props)
 
     const navigater = (page) => {
@@ -24,32 +25,42 @@ const PageItem = (props) => {
                 }, (offline) => {
                     showToast(t('commonApp.internetError'))
                 })
+                // props.navigation.navigate('Profile')
                 break;
-            case t('drawer.screen2'):
-                props.navigation.navigate('MarkAttendance')
-                break;
+            // case t('drawer.screen2'):
+            //     props.navigation.navigate('MarkAttendance')
+            //     break;
             case t('drawer.screen3'):
-                props.navigation.navigate('Feed')
+                props.navigation.navigate('Sessions')
                 break;
-            case t('drawer.screen4'):
-                isOnline((connected) => {
-                    dispatch(getFullData(user.id, () => {
-                        props.navigation.navigate('PreviousClasses')
-                    }, () => { }))
-                }, (offline) => {
-                    showToast(t('commonApp.internetError'))
-                })
+            // case t('drawer.screen4'):
+            //     isOnline((connected) => {
+            //         dispatch(getFullData(user.id, () => {
+            //             // alert('redirect===')
+            //             props.navigation.navigate('PreviousClasses')
+            //         }, () => { }))
+            //     }, (offline) => {
+            //         showToast(t('commonApp.internetError'))
+            //     })
 
                 break;
             case t('drawer.screen5'):
-                props.navigation.navigate('OnlineCourses')
+                isOnline((connected) => {
+                            dispatch(getSessionData(user.id, () => {
+                               
+                                props.navigation.navigate('PreviousSessions')
+                            }, () => { }))
+                        }, (offline) => {
+                            showToast(t('commonApp.internetError'))
+                        })
+        
                 break;
-            case t('drawer.screen6'):
-                props.navigation.navigate('CcpTools')
-                break;
-            case t('drawer.screen7'):
-                props.navigation.navigate('Games')
-                break;
+            // case t('drawer.screen6'):
+            //     props.navigation.navigate('CcpTools')
+            //     break;
+            // case t('drawer.screen7'):
+            //     props.navigation.navigate('Games')
+            //     break;
             default:
                 break;
         }

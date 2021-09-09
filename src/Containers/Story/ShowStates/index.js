@@ -93,6 +93,7 @@ const Home = (props) => {
                         source={showScreenUrl}
                         style={styles.Image}
                     />
+                    
                 </FadeInView>
 
                 :

@@ -55,6 +55,7 @@ export const fetchNurseProfile = (nurseId) => {
         client_secret: '6MkGM8zX4rjk0LTU7vt3pB-hjqhWgX1P8VydKzmvLXI',
         // mobile_number: '8105739684',
         password: 'Noora@123',
+        app_type: "tb"
       }
       console.log('fetchNurseProfileParams======', JSON.stringify(params))
       let api = await storyApi.getNurseProfile(params)
@@ -78,7 +79,7 @@ export const markAttendance = (params, setLoading, done, isEditProfile) => {
       console.log('SubmitParams=======', JSON.stringify(params))
       let api = await storyApi.submitClass(params)
       console.log(
-        'c',
+        'MarkingAttendance====',
         JSON.stringify(api),
       )
       if (api.success) {
@@ -100,6 +101,109 @@ export const markAttendance = (params, setLoading, done, isEditProfile) => {
         done(false)
       }
       console.log('showing error', error)
+    }
+  }
+}
+export const editAttendance = (params, setLoading, done, isEditProfile) => {
+  return async (dispatch) => {
+    try {
+      console.log('SubmitEditParams=======', JSON.stringify(params))
+      let api = await storyApi.editClass(params)
+      console.log(
+        'EditApiCall====',
+        JSON.stringify(api),
+      )
+      if (api) {
+       console.log('Inside Api Success=====', JSON.stringify(api))
+        setLoading(true)
+        if (isEditProfile) {
+          done(true)
+          Util.navigate('PreviousClasses')
+        } else {
+          console.log('Inside Go to Navigate')
+          // Util.navigate('PreviousClasses')
+        }
+      } else {
+        setLoading(false)
+        if (isEditProfile) {
+          done(false)
+        }
+      }
+    } catch (error) {
+      setLoading(false)
+      if (isEditProfile) {
+        done(false)
+      }
+      console.log('showing error', error)
+    }
+  }
+}
+
+//Sessions
+export const markSession = (params, setLoading, done, isEditProfile) => {
+  return async (dispatch) => {
+    try {
+      console.log('SubmitSessionParams=======', JSON.stringify(params))
+      let api = await storyApi.submitSession(params)
+      console.log(
+        'markSession====',
+        JSON.stringify(api),
+      )
+      if (api.success) {
+        setLoading(true)
+        if (isEditProfile) {
+          done(true)
+        } else {
+          Util.navigate('SessionMarked')
+        }
+      } else {
+        setLoading(false)
+        if (isEditProfile) {
+          done(false)
+        }
+      }
+    } catch (error) {
+      setLoading(false)
+      if (isEditProfile) {
+        done(false)
+      }
+      console.log('showing API Response error', error)
+    }
+  }
+}
+
+export const editSessions = (params, setLoading, done, isEditProfile) => {
+  return async (dispatch) => {
+    try {
+      console.log('SubmitEditSessionParams=======', JSON.stringify(params))
+      let api = await storyApi.editSession(params)
+      console.log(
+        'EditApiCall====',
+        JSON.stringify(api),
+      )
+      if (api) {
+       console.log('Inside Api Success=====', JSON.stringify(api))
+        setLoading(false)
+        done(true)
+        if (isEditProfile) {
+          // done(true)
+          // Util.navigate('PreviousSessions')
+        } else {
+          console.log('Inside Go to Navigate')
+          // Util.navigate('PreviousClasses')
+        }
+      } else {
+        setLoading(false)
+        if (isEditProfile) {
+          done(false)
+        }
+      }
+    } catch (error) {
+      setLoading(false)
+      if (isEditProfile) {
+        done(false)
+      }
+      console.log('showing error of API', error)
     }
   }
 }
@@ -136,6 +240,7 @@ export const getFullData = (nurseId, success, reject) => {
         client_secret: '6MkGM8zX4rjk0LTU7vt3pB-hjqhWgX1P8VydKzmvLXI',
         // mobile_number: '8105739684',
         password: 'Noora@123',
+        app_type: "tb"
       }
       let api = await storyApi.getNurseClass(params)
       console.log('showing getNurseClass response===', api)
@@ -149,7 +254,7 @@ export const getFullData = (nurseId, success, reject) => {
             }
           }
         }
-        console.log('API DETAILS======', JSON.stringify(api.details))
+        console.log('API DETAILS NURSECLASS======', JSON.stringify(api.details))
         dispatch({
           type: TYPES.NURSE_PREVIOUS_CLASSES,
           previousClasses: api.details,
@@ -164,6 +269,50 @@ export const getFullData = (nurseId, success, reject) => {
   }
 }
 
+//Fetch previous Sessions
+export const getSessionData = (nurseId, success,reject) => {
+  return async (dispatch) => {
+    try {
+      let params = {
+        nurse_id: nurseId,
+        appuser_id: nurseId,
+        // access_token: '',
+        // token: 'j56sugRk029Po5DB',
+        grant_type: 'password',
+        client_id: 'HtgZ9aPEswoaNqfXLSNlnd9EhAUzmU_ett_MGXqAoHk',
+        client_secret: '6MkGM8zX4rjk0LTU7vt3pB-hjqhWgX1P8VydKzmvLXI',
+        // mobile_number: '8105739684',
+        password: 'Noora@123',
+        app_type: "tb"
+      }
+      let api = await storyApi.getNurseSession(params)
+      console.log('showing getNurseSession response===', JSON.stringify(api))
+      // alert(JSON.stringify(api))
+      if (api) {
+        if (api.length > 0) {
+          for (var i = 0; i < api.length; i++) {
+            console.log('APILOOP====', api[i])
+            if (i % 2 == 0) {
+              api[i].isEven = true
+            } else {
+              api[i].isEven = false
+            }
+          }
+        }
+        console.log('API DETAILS======', JSON.stringify(api))
+        dispatch({
+          type: TYPES.NURSE_PREVIOUS_SESSIONS,
+          previousSessions: api,
+        })
+        success(true) 
+      } else {
+        reject(true)
+      }
+    } catch (error) {
+      reject(true)
+    }
+  }
+}
 //getComments for user feed
 
 export const fetchNurseComments = (nurseId, content_id, success, reject) => {

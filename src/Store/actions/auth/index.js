@@ -20,6 +20,7 @@ export const getAppSettings = (userApp) => {
         client_secret: '6MkGM8zX4rjk0LTU7vt3pB-hjqhWgX1P8VydKzmvLXI',
         mobile_number: userApp.mobile_number,
         password: 'Noora@123',
+        app_type: "tb"
       }
       let api = await AuthenticationApi.getAppSetting(params)
       console.log(
@@ -79,6 +80,7 @@ export const requestOtp = (userApp, navigation, setLoading) => {
         client_secret: '6MkGM8zX4rjk0LTU7vt3pB-hjqhWgX1P8VydKzmvLXI',
         // mobile_number:  '8105739684',
         password: 'Noora@123',
+        app_type: "tb"
       }
 
       let authApi = await AuthenticationApi.getAppSetting(params)

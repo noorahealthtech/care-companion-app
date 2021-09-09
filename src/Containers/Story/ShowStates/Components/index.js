@@ -11,7 +11,7 @@ const Headings = () => {
     return (
         <View style={styles.container}>
             <Text allowFontScaling={false} style={styles.heading}>{t('states.heading')}</Text>
-            <Text allowFontScaling={false} style={styles.todo}>{t('states.todo')}</Text>
+            {/* <Text allowFontScaling={false} style={styles.todo}>{t('states.todo')}</Text> */}
         </View>
     );
 };
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     heading: {
         color: Colors.white,
         fontFamily: 'Assistant-Bold',
-        fontSize: WP('7')
+        fontSize: WP('7'),
     },
     todo: {
         color: Colors.white,

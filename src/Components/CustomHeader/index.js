@@ -49,20 +49,20 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     drawer: {
-        height: WP('6'),
-        width: WP('6'),
+        height: WP('5'),
+        width: WP('5'),
         tintColor: Colors.white,
         resizeMode: 'contain',
     },
     menuIcon: {
-        height: WP('8'),
-        width: WP('6.3'),
+        height: WP('7'),
+        width: WP('5'),
         tintColor: Colors.white,
     },
     label: {
         color: Colors.white,
         fontFamily: 'Assistant-Regular',
-        fontSize: WP('6')
+        fontSize: WP('5.5')
     },
     name: {
         color: Colors.white,

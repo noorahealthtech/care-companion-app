@@ -22,7 +22,7 @@ const ProfessionalDetails = (props) => {
                     props.medical.length > 0 ?
                         props.medical.map((condition) => {
                             return (
-                                <Text style={styles.details}>    {condition.name}</Text>
+                                <Text style={styles.details}> {condition.name}</Text>
                             )
                         })
                         :
@@ -31,8 +31,8 @@ const ProfessionalDetails = (props) => {
 
                 }
             </Text>
-            <Text style={styles.questions}>{t('profile.tot')} :    <Text style={styles.details}>{moment(props.tot).format('DD MMMM YYYY')}</Text></Text>
-            <Text style={styles.questions}>{t('profile.ccp')} :    <Text style={styles.details}>{props.ccp ? props.ccp.title : 'Condition area not found'}</Text></Text>
+            {/* <Text style={styles.questions}>{t('profile.tot')} :    <Text style={styles.details}>{moment(props.tot).format('DD MMMM YYYY')}</Text></Text>
+            <Text style={styles.questions}>{t('profile.ccp')} :    <Text style={styles.details}>{props.ccp ? props.ccp.title : 'Condition area not found'}</Text></Text> */}
         </View>
     );
 };

@@ -19,28 +19,32 @@ const CustomDrawer = (props) => {
             title: t('drawer.screen1'),
             id: Math.random()
         },
+        // {
+        //     title: t('drawer.screen2'),
+        //     id: Math.random()
+        // },
+        
         {
-            title: t('drawer.screen2'),
-            id: Math.random()
-        }, {
             title: t('drawer.screen3'),
             id: Math.random()
-        }, {
-            title: t('drawer.screen4'),
-            id: Math.random()
         },
+        
+        // {
+        //     title: t('drawer.screen4'),
+        //     id: Math.random()
+        // },
         {
             title: t('drawer.screen5'),
             id: Math.random()
         },
-        {
-            title: t('drawer.screen6'),
-            id: Math.random()
-        },
-        {
-            title: t('drawer.screen7'),
-            id: Math.random()
-        },
+        // {
+        //     title: t('drawer.screen6'),
+        //     id: Math.random()
+        // },
+        // {
+        //     title: t('drawer.screen7'),
+        //     id: Math.random()
+        // },
     ])
 
     const toggleDrawer = () => props.navigation.toggleDrawer();;

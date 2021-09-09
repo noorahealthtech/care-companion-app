@@ -11,12 +11,17 @@ import { color } from 'react-native-reanimated';
 const SessionInput = (props) => {
     return (
         <View style={[styles.container, props.inputContainerStyles]}>
+           {props.titleVisible ? (
+            <View/>
+           ): (
             <Text allowFontScaling={false} style={styles.title}>{props.title}</Text>
+           )}
             <TextInput
-                style={[styles.inputField, { height: props.isNotes ? 'auto' : WP('13'), minHeight: props.isNotes ? WP('13') : null }, props.inputStyles]}
+                style={[styles.inputField, { height: props.isNotes ? 'auto' : WP('13'), minHeight: props.isNotes ? WP('13') : null } ]}
                 multiline={props.isNotes ? true : false}
                 {...props}
                 placeholderTextColor={Colors.pickerBorder}
+                
             />
         </View>
     );
@@ -25,7 +30,7 @@ const SessionInput = (props) => {
 // define your styles
 const styles = StyleSheet.create({
     container: {
-        display: 'flex'
+        display: 'flex',
     },
     inputField: {
         display: 'flex',

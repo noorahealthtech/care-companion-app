@@ -3,6 +3,7 @@ const initialState = {
   nurseFeed: [],
   nurseProfile: null,
   classesDetails: [],
+  sessionsDetails: [],
   nurseComments: [],
   nurseLikes: [],
   coursesLists: [],
@@ -24,6 +25,11 @@ const reducer = (state = initialState, actions) => {
         ...state,
         classesDetails: actions.previousClasses,
       };
+    case TYPES.NURSE_PREVIOUS_SESSIONS:
+        return {
+          ...state,
+          sessionsDetails: actions.previousSessions,
+        };
     case TYPES.NURSE_COMMENTS:
       return {
         ...state,
